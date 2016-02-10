@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="AX_Inspecciones" Class="DocumentDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=.;Initial Catalog=Widul;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="WidulConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="" Member="TransitionDatas">
+    <Type Name="TransitionData">
+      <Column Name="observation" Type="System.String" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TB_BPM_Bitacora" Member="Histories">
+    <Type Name="History">
+      <Column Name="BITA_Fecha" Member="updatedAt" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="true" />
+      <Column Name="BITA_Observacion" Member="observation" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="ESTA_Nombre" Member="state_name" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="ESTA_Token" Member="state_token" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="ESTA_Identificador" Member="state_identifier" Type="System.String" DbType="Char(4) NOT NULL" CanBeNull="false" />
+      <Column Name="TIEN_Identificador" Member="updatedBy_type" Storage="_entity_type" Type="System.String" DbType="Char(4)" CanBeNull="true" />
+      <Column Name="ENTI_Identificador" Member="updatedBy_name" Storage="_entity_name" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="ENTI_Token" Member="updatedBy_token" Storage="_entity_token" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.VT_Documentos" Member="V_Documents">
+    <Type Name="V_Document">
+      <Column Name="DOCU_Token" Member="token" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="DOCU_Identificador" Member="identifier" Type="System.String" DbType="Char(9) NOT NULL" CanBeNull="false" />
+      <Column Name="DOCU_Fecha" Member="createdAt" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="TIDO_Token" Member="type_token" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="TIDO_Nombre" Member="type_name" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="TIDO_Identificador" Member="type_identifier" Type="System.String" DbType="Char(4) NOT NULL" CanBeNull="false" />
+      <Column Name="ESTA_Token" Member="state_token" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="ESTA_Nombre" Member="state_name" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="ESTA_Identificador" Member="state_identifier" Type="System.String" DbType="Char(4) NOT NULL" CanBeNull="false" />
+      <Column Name="ENTI_Token" Member="entity_token" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="ENTI_Identificador" Member="entity_identifier" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="TIEN_Token" Member="entityType_token" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="TIEN_Nombre" Member="entityType_name" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="TIEN_Identificador" Member="entityType_identifier" Type="System.String" DbType="Char(4)" CanBeNull="true" />
+      <Column Name="BITA_Observacion" Member="lastObservation" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+    </Type>
+  </Table>
+  <Table Name="dbo.VT_TipoDocumentos" Member="V_DocumentTypes">
+    <Type Name="V_DocumentTypes">
+      <Column Name="TIDO_Nombre" Member="name" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="TIDO_Descripcion" Member="description" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="TIDO_Identificador" Member="identifier" Type="System.String" DbType="Char(4) NOT NULL" CanBeNull="false" />
+      <Column Name="TIDO_Token" Member="token" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="" Member="NotificationRecipients">
+    <Type Name="NotificationRecipient">
+      <Column Name="Notificacion" Member="notification" Type="System.String" CanBeNull="false" />
+      <Column Name="TIDO_Nombre" Member="documentType" Type="System.String" CanBeNull="false" />
+      <Column Name="state" Type="System.String" CanBeNull="false" />
+      <Column Name="recipient" Type="System.String" CanBeNull="false" />
+      <Column Name="type" Type="System.String" CanBeNull="false" />
+    </Type>
+  </Table>
+</Database>

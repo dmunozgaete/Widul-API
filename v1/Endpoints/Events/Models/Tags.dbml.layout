@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="Tags">
+  <DataContextMoniker Name="/TagsDataContext" />
+  <nestedChildShapes>
+    <classShape Id="44c7b18f-e200-431e-96c5-776e0244be3c" absoluteBounds="0.5, 0.5, 2, 1.0016910807291668">
+      <DataClassMoniker Name="/TagsDataContext/VW_EventTags" />
+      <nestedChildShapes>
+        <elementListCompartment Id="82fbf5b9-ad91-4d2e-91a7-3d445b0cd2cc" absoluteBounds="0.51500000000000012, 0.96, 1.9700000000000002, 0.44169108072916669" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

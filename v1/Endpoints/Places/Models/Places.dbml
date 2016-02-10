@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Widul" Class="PlacesDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=.;Initial Catalog=Widul;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="WidulConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.VW_Places" Member="Place">
+    <Type Name="Place">
+      <Column Name="PLAC_Name" Member="name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="PLAC_Address" Member="address" Type="System.String" DbType="VarChar(400) NOT NULL" CanBeNull="false" />
+      <Column Name="PLAC_Latitude" Member="lat" Storage="_latitude" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="PLAC_Longitude" Member="lng" Storage="_longitude" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="PLAC_Capacity" Member="capacity" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PLAC_CreatedAt" Member="createdAt" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="PLAC_Tip" Member="tip" Type="System.String" DbType="VarChar(400) NOT NULL" CanBeNull="false" />
+      <Column Name="PLAC_Token" Member="token" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="USER_FullName" Member="creator_fullname" Type="System.String" DbType="VarChar(250) NOT NULL" CanBeNull="false" />
+      <Column Name="ENTI_Token" Member="creator_token" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="USER_Photo" Member="creator_photo" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="" Member="NewPlace">
+    <Type Name="NewPlace">
+      <Column Name="PLAC_Name" Member="name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="PLAC_Address" Member="address" Type="System.String" DbType="VarChar(400) NOT NULL" CanBeNull="false" />
+      <Column Name="PLAC_Latitude" Member="lat" Storage="_latitude" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="PLAC_Longitude" Member="lng" Storage="_longitude" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="PLAC_Capacity" Member="capacity" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PLAC_Tip" Member="tip" Type="System.String" DbType="VarChar(400) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+</Database>

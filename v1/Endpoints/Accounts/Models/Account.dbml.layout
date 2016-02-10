@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="Account">
+  <DataContextMoniker Name="/AccountDataContext" />
+  <nestedChildShapes>
+    <classShape Id="5b80a448-5094-4d36-b3a1-6f1f48a43442" absoluteBounds="2.75, 0.5, 2, 2.9247054036458331">
+      <DataClassMoniker Name="/AccountDataContext/VW_Users" />
+      <nestedChildShapes>
+        <elementListCompartment Id="2cc6059b-9570-4c50-851e-2bba4885e381" absoluteBounds="2.7649999999999997, 0.96, 1.9700000000000002, 2.364705403645833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="cc433633-701d-4ac0-b004-a715f558d231" absoluteBounds="0.5, 0.5, 2, 2.5401025390625">
+      <DataClassMoniker Name="/AccountDataContext/Account" />
+      <nestedChildShapes>
+        <elementListCompartment Id="9489aa7a-3bcd-4c02-a38d-ef678467cec8" absoluteBounds="0.51499999999999968, 0.96, 1.9700000000000002, 1.9801025390625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="c62c1ad7-a5a4-4844-863a-dd37ade4ebe3" absoluteBounds="5, 0.5, 2, 1.3862939453125005">
+      <DataClassMoniker Name="/AccountDataContext/Role" />
+      <nestedChildShapes>
+        <elementListCompartment Id="d3fcec85-09af-45a8-a370-f6b52d39fec2" absoluteBounds="5.015, 0.96, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Class="TaskDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=.;Initial Catalog=Widul;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="WidulConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.View_1" Member="Tasks">
+    <Type Name="Task">
+      <Column Name="DOCU_Token" Member="token" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="TIDO_Token" Member="type_token" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="ESTA_Token" Member="state_token" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="DOCU_Identificador" Member="identifer" Type="System.String" DbType="Char(9) NOT NULL" CanBeNull="false" />
+      <Column Name="TIDO_Nombre" Member="type_name" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="ESTA_Nombre" Member="state_name" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="TARE_Fecha" Member="task_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="TARE_Url" Member="task_url" Type="System.String" DbType="VarChar(2000)" CanBeNull="true" />
+    </Type>
+  </Table>
+</Database>

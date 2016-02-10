@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Widul" Class="AccountDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=.;Initial Catalog=Widul;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="WidulConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.VW_Users" Member="VW_Users">
+    <Type Name="VW_Users">
+      <Column Name="ENTI_Token" Member="token" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ENTI_CreatedAt" Member="createdAt" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="ENTI_Identifier" Member="identifier" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="USER_Photo" Member="photo" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="USER_Email" Member="email" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="USER_FullName" Member="fullname" Type="System.String" DbType="VarChar(250) NOT NULL" CanBeNull="false" />
+      <Column Name="USER_LastConnection" Member="lastConnection" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="USER_Active" Member="active" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="ENTY_Identifier" Member="type_identifier" Type="System.String" DbType="Char(4)" CanBeNull="true" />
+      <Column Name="ENTY_Token" Member="type_token" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="ENTY_Name" Member="type_name" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TB_COR_User" Member="Account">
+    <Type Name="Account">
+      <Column Name="ENTI_Token" Member="token" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ENTI_CreatedAt" Member="createdAt" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="ENTI_Identifier" Member="identifier" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="USER_Active" Member="active" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="USER_LastConnection" Member="lastConnection" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="USER_Email" Member="email" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="USER_FullName" Member="fullname" Storage="_name" Type="System.String" DbType="VarChar(250) NOT NULL" CanBeNull="false" />
+      <Column Name="USER_Photo" Member="photo" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="true" />
+      <Column Name="roles" Type="List&lt;Models.Role&gt;" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TB_COR_Role" Member="Role">
+    <Type Name="Role">
+      <Column Name="ROLE_Identifier" Member="identifier" Type="System.String" DbType="Char(4) NOT NULL" CanBeNull="false" />
+      <Column Name="ENTI_Token" Member="token" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ENTI_Identifier" Member="name" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+</Database>
