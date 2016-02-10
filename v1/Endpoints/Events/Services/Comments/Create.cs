@@ -8,20 +8,33 @@ using System.Web;
 
 namespace API.Endpoints.Events.Services.Comments
 {
+    /// <summary>
+    /// Create a new comment for the target event
+    /// </summary>
     public class Create: Gale.REST.Http.HttpCreateActionResult<Models.NewComment>
     {
 
         String _user;
         String _evenToken;
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="eventToken">Event token</param>
+        /// <param name="user">User Token</param>
+        /// <param name="comment">Comment</param>
         public Create(String eventToken, String user, Models.NewComment comment) : base(comment) {
 
             _user = user;
             _evenToken = eventToken;
 
-
         }
 
+        /// <summary>
+        /// Async Process
+        /// </summary>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public override Task<HttpResponseMessage> ExecuteAsync(CancellationToken cancellationToken)
         {
 
@@ -38,13 +51,19 @@ namespace API.Endpoints.Events.Services.Comments
                 svc.Parameters.Add("EVN_Token", _evenToken);
                 svc.Parameters.Add("COM_Comment", this.Model.comment);
 
-                this.ExecuteAction(svc);
+                var repo = this.ExecuteQuery(svc);
+                var newlyComment = repo.GetModel<Models.VW_EventComment>().FirstOrDefault();
 
                 return Task.FromResult(new HttpResponseMessage()
                 {
+                    Content =new  ObjectContent<Models.VW_EventComment>(
+                        newlyComment, 
+                        new Gale.REST.Http.Formatter.KqlFormatter()
+                    ),
                     StatusCode = System.Net.HttpStatusCode.Created
                 });
             }
+            //------------------------------------------------
 
 
 

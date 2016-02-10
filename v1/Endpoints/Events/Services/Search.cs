@@ -17,7 +17,7 @@ namespace API.Endpoints.Events.Services
         /// Constructor
         /// </summary>
         /// <param name="query"></param>
-        public Search(String query): base(query) { }
+        public Search(String query) : base(query) { }
 
         /// <summary>
         /// Async Process
@@ -35,7 +35,8 @@ namespace API.Endpoints.Events.Services
 
                 //Get tables (According to the degradation algorithm)
                 var pagination = repo.GetModel<Models.Pagination>().FirstOrDefault();
-                List<Models.VW_Events> events = repo.GetModel<Models.VW_Events>(1);
+                List<Models.FindedEvent> events = repo.GetModel<Models.FindedEvent>(1);
+                List<Models.FindedTag> tags = repo.GetModel<Models.FindedTag>(2);
 
                 return Task.FromResult(new HttpResponseMessage()
                 {
@@ -44,9 +45,28 @@ namespace API.Endpoints.Events.Services
                         limit = pagination.limit,
                         offset = pagination.offset,
                         total = pagination.total,
-                        items = events
+                        items = (from t in events
+                                 select new
+                                 {
+                                     name = t.name,
+                                     token = t.token,
+                                     date = t.date,
+                                     description = t.description,
+                                     creator = new
+                                     {
+                                         name = t.creator_name,
+                                         photo = t.creator_photo,
+                                         token = t.creator_token
+                                     },
+                                     knowledge = new
+                                     {
+                                         name = t.knowledge_name,
+                                         token = t.knowledge_token
+                                     },
+                                     tags = (from tag in tags where tag.event_id == t.id select tag.name)
+                                 })
                     },
-                        new Gale.REST.Http.Formatter.KqlFormatter()
+                      System.Web.Http.GlobalConfiguration.Configuration.Formatters.JsonFormatter
                     )
                 });
             }

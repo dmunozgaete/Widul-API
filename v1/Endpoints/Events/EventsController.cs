@@ -15,17 +15,6 @@ namespace API.Endpoints.Events
         #region EVENT
 
         /// <summary>
-        /// Get all Events
-        /// </summary>
-        /// <returns></returns>
-        [HttpGet]
-        [Swashbuckle.Swagger.Annotations.QueryableEndpoint(typeof(Models.VW_Events))]
-        public IHttpActionResult Get()
-        {
-            return new Gale.REST.Http.HttpQueryableActionResult<Models.VW_Events>(this.Request);
-        }
-
-        /// <summary>
         /// Get Event Details
         /// </summary>
         /// <returns></returns>
@@ -117,7 +106,7 @@ namespace API.Endpoints.Events
         /// <returns></returns>
         [HttpGet]
         [HierarchicalRoute("/Search")]
-        public IHttpActionResult SearchEvent(String q)
+        public IHttpActionResult SearchEvent(String q = null)
         {
             return new Services.Search(q);
         }
