@@ -30,6 +30,9 @@ namespace API.Endpoints.Events.Models
 		
     #region Definiciones de métodos de extensibilidad
     partial void OnCreated();
+    partial void InsertVW_EventComment(VW_EventComment instance);
+    partial void UpdateVW_EventComment(VW_EventComment instance);
+    partial void DeleteVW_EventComment(VW_EventComment instance);
     #endregion
 		
 		public CommentsDataContext() : 
@@ -107,8 +110,10 @@ namespace API.Endpoints.Events.Models
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.VW_EventComments")]
-	public partial class VW_EventComment
+	public partial class VW_EventComment : INotifyPropertyChanging, INotifyPropertyChanged
 	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
 		private System.Guid _creator_token;
 		
@@ -122,8 +127,27 @@ namespace API.Endpoints.Events.Models
 		
 		private System.Guid _token;
 		
+    #region Definiciones de métodos de extensibilidad
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void Oncreator_tokenChanging(System.Guid value);
+    partial void Oncreator_tokenChanged();
+    partial void Oncreator_nameChanging(string value);
+    partial void Oncreator_nameChanged();
+    partial void Oncreator_photoChanging(System.Nullable<System.Guid> value);
+    partial void Oncreator_photoChanged();
+    partial void OncommentChanging(string value);
+    partial void OncommentChanged();
+    partial void OncreatedAtChanging(System.DateTime value);
+    partial void OncreatedAtChanged();
+    partial void OntokenChanging(System.Guid value);
+    partial void OntokenChanged();
+    #endregion
+		
 		public VW_EventComment()
 		{
+			OnCreated();
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="ENTI_Token", Storage="_creator_token", DbType="UniqueIdentifier NOT NULL")]
@@ -137,7 +161,11 @@ namespace API.Endpoints.Events.Models
 			{
 				if ((this._creator_token != value))
 				{
+					this.Oncreator_tokenChanging(value);
+					this.SendPropertyChanging();
 					this._creator_token = value;
+					this.SendPropertyChanged("creator_token");
+					this.Oncreator_tokenChanged();
 				}
 			}
 		}
@@ -153,7 +181,11 @@ namespace API.Endpoints.Events.Models
 			{
 				if ((this._creator_name != value))
 				{
+					this.Oncreator_nameChanging(value);
+					this.SendPropertyChanging();
 					this._creator_name = value;
+					this.SendPropertyChanged("creator_name");
+					this.Oncreator_nameChanged();
 				}
 			}
 		}
@@ -169,7 +201,11 @@ namespace API.Endpoints.Events.Models
 			{
 				if ((this._creator_photo != value))
 				{
+					this.Oncreator_photoChanging(value);
+					this.SendPropertyChanging();
 					this._creator_photo = value;
+					this.SendPropertyChanged("creator_photo");
+					this.Oncreator_photoChanged();
 				}
 			}
 		}
@@ -185,7 +221,11 @@ namespace API.Endpoints.Events.Models
 			{
 				if ((this._comment != value))
 				{
+					this.OncommentChanging(value);
+					this.SendPropertyChanging();
 					this._comment = value;
+					this.SendPropertyChanged("comment");
+					this.OncommentChanged();
 				}
 			}
 		}
@@ -201,12 +241,16 @@ namespace API.Endpoints.Events.Models
 			{
 				if ((this._createdAt != value))
 				{
+					this.OncreatedAtChanging(value);
+					this.SendPropertyChanging();
 					this._createdAt = value;
+					this.SendPropertyChanged("createdAt");
+					this.OncreatedAtChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="COMM_Token", Storage="_token", DbType="UniqueIdentifier NOT NULL")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="COMM_Token", Storage="_token", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
 		public System.Guid token
 		{
 			get
@@ -217,8 +261,32 @@ namespace API.Endpoints.Events.Models
 			{
 				if ((this._token != value))
 				{
+					this.OntokenChanging(value);
+					this.SendPropertyChanging();
 					this._token = value;
+					this.SendPropertyChanged("token");
+					this.OntokenChanged();
 				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
 	}

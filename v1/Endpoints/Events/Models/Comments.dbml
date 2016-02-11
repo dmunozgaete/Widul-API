@@ -12,7 +12,7 @@
       <Column Name="USER_Photo" Member="creator_photo" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
       <Column Name="COMM_Comment" Member="comment" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" />
       <Column Name="COMM_createdAt" Member="createdAt" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="COMM_Token" Member="token" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="COMM_Token" Member="token" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
     </Type>
   </Table>
 </Database>
