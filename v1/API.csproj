@@ -113,7 +113,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Account.dbml</DependentUpon>
     </Compile>
+    <Compile Include="Endpoints\Accounts\Services\Follow.cs" />
     <Compile Include="Endpoints\Accounts\Services\Get.cs" />
+    <Compile Include="Endpoints\Accounts\Services\Unfollow.cs" />
     <Compile Include="Endpoints\Accounts\Templates\Mail\Mail.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

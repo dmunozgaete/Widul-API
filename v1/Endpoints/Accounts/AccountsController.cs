@@ -58,5 +58,41 @@ namespace API.Endpoints.Accounts
         }
 
 
+        /// <summary>
+        /// Follow Accounts
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        [Swashbuckle.Swagger.Annotations.SwaggerResponseRemoveDefaults]
+        [Swashbuckle.Swagger.Annotations.SwaggerResponse(HttpStatusCode.Created)]
+        [HierarchicalRoute("/{account:Guid}/Follow")]
+        public IHttpActionResult Follow(String account)
+        {
+            //------------------------------------------------------------------------------------------------------
+            // GUARD EXCEPTIONS
+            Gale.Exception.RestException.Guard(() => account == null, "EMPTY_FOLLOWER", API.Errors.ResourceManager);
+            //------------------------------------------------------------------------------------------------------
+
+            return new Services.Follow(this.User.PrimarySid(), account);
+        }
+
+        /// <summary>
+        /// UnFollow Accounts
+        /// </summary>
+        /// <returns></returns>
+        [HttpDelete]
+        [Swashbuckle.Swagger.Annotations.SwaggerResponseRemoveDefaults]
+        [Swashbuckle.Swagger.Annotations.SwaggerResponse(HttpStatusCode.OK)]
+        [HierarchicalRoute("/{account:Guid}/Follow")]
+        public IHttpActionResult Unfollow(String account)
+        {
+            //------------------------------------------------------------------------------------------------------
+            // GUARD EXCEPTIONS
+            Gale.Exception.RestException.Guard(() => account == null, "EMPTY_FOLLOWER", API.Errors.ResourceManager);
+            //------------------------------------------------------------------------------------------------------
+
+            return new Services.Unfollow(this.User.PrimarySid(), account);
+        }
+
     }
 }

@@ -50,6 +50,9 @@
       <Column Name="USER_FullName" Member="creator_name" Type="System.String" DbType="VarChar(250) NOT NULL" CanBeNull="false" />
       <Column Name="USER_Token" Member="creator_token" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
       <Column Name="USER_Photo" Member="creator_photo" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="Following" Member="creator_following" Type="System.Boolean" CanBeNull="false" />
+      <Column Name="USCO_Following" Member="creator_followings" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="USCO_Followers" Member="creator_followers" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="KNOW_Name" Member="knowledge_name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="KNOW_Token" Member="knowledge_token" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
       <Column Name="place" Type="Models.Place" CanBeNull="false" />

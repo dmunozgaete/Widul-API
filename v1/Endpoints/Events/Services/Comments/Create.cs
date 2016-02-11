@@ -47,9 +47,9 @@ namespace API.Endpoints.Events.Services.Comments
 
             using (var svc = new Gale.Db.DataService("SP_INS_EventComment"))
             {
-                svc.Parameters.Add("USR_Token", _user);
-                svc.Parameters.Add("EVN_Token", _evenToken);
-                svc.Parameters.Add("COM_Comment", this.Model.comment);
+                svc.Parameters.Add("USER_Token", _user);
+                svc.Parameters.Add("EVNT_Token", _evenToken);
+                svc.Parameters.Add("COMM_Comment", this.Model.comment);
 
                 var repo = this.ExecuteQuery(svc);
                 var newlyComment = repo.GetModel<Models.VW_EventComment>().FirstOrDefault();

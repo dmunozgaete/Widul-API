@@ -543,6 +543,12 @@ namespace API.Endpoints.Events.Models
 		
 		private System.Nullable<System.Guid> _creator_photo;
 		
+		private bool _creator_following;
+		
+		private int _creator_followings;
+		
+		private int _creator_followers;
+		
 		private string _knowledge_name;
 		
 		private System.Guid _knowledge_token;
@@ -745,6 +751,54 @@ namespace API.Endpoints.Events.Models
 				if ((this._creator_photo != value))
 				{
 					this._creator_photo = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="Following", Storage="_creator_following")]
+		public bool creator_following
+		{
+			get
+			{
+				return this._creator_following;
+			}
+			set
+			{
+				if ((this._creator_following != value))
+				{
+					this._creator_following = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="USCO_Following", Storage="_creator_followings", DbType="Int NOT NULL")]
+		public int creator_followings
+		{
+			get
+			{
+				return this._creator_followings;
+			}
+			set
+			{
+				if ((this._creator_followings != value))
+				{
+					this._creator_followings = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="USCO_Followers", Storage="_creator_followers", DbType="Int NOT NULL")]
+		public int creator_followers
+		{
+			get
+			{
+				return this._creator_followers;
+			}
+			set
+			{
+				if ((this._creator_followers != value))
+				{
+					this._creator_followers = value;
 				}
 			}
 		}
