@@ -24,7 +24,7 @@ namespace API.Endpoints.Knowledge.Services
         public Create(String creator, Models.newKnowledge place) : base(place) {
 
             _creator = creator;
-
+            
         }
         
 

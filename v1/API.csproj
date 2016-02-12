@@ -154,6 +154,7 @@
       <DependentUpon>Tags.dbml</DependentUpon>
     </Compile>
     <Compile Include="Endpoints\Events\Services\Comments\Create.cs" />
+    <Compile Include="Endpoints\Events\Services\Comments\Get.cs" />
     <Compile Include="Endpoints\Events\Services\Create.cs" />
     <Compile Include="Endpoints\Events\Services\Get.cs" />
     <Compile Include="Endpoints\Events\Services\Join.cs" />

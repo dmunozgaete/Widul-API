@@ -17,6 +17,7 @@
       <Column Name="Limit" Member="limit" Type="System.Int32" CanBeNull="false" />
       <Column Name="Offset" Member="offset" Type="System.Int32" CanBeNull="false" />
       <Column Name="Total" Member="total" Type="System.Int32" CanBeNull="false" />
+      <Column Member="items" Type="System.Collections.IEnumerable" CanBeNull="false" />
     </Type>
   </Table>
   <Table Name="dbo.TB_WID_EventTag" Member="EventTag">
