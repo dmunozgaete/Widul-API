@@ -175,6 +175,8 @@
     </Compile>
     <Compile Include="Endpoints\KnowledgeRequests\Services\Create.cs" />
     <Compile Include="Endpoints\KnowledgeRequests\Services\Get.cs" />
+    <Compile Include="Endpoints\KnowledgeRequests\Services\Join.cs" />
+    <Compile Include="Endpoints\KnowledgeRequests\Services\Left.cs" />
     <Compile Include="Endpoints\Knowledge\KnowledgesController.cs" />
     <Compile Include="Endpoints\Knowledge\Models\Knowledge.designer.cs">
       <AutoGen>True</AutoGen>

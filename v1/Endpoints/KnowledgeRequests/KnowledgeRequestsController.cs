@@ -27,6 +27,36 @@ namespace API.Endpoints.KnowledgeRequests
         }
 
 
+        #region --> JOIN
+
+        /// <summary>
+        /// Join a Knowledge Request by its GUID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+
+        [HttpPost]
+        [HierarchicalRoute("/{id:Guid}/Join")]
+        [Gale.Security.Oauth.Jwt.Authorize]
+        public IHttpActionResult JoinEvent(String id)
+        {
+            return new Services.Join(id, this.User.PrimarySid().ToString());
+        }
+
+        /// <summary>
+        /// Left a Knowledge Request by its GUID
+        /// </summary>
+        /// <param name="id">Event GUID</param>
+        /// <returns></returns>
+        [HttpDelete]
+        [HierarchicalRoute("/{id:Guid}/Join")]
+        [Gale.Security.Oauth.Jwt.Authorize]
+        public IHttpActionResult LeftEvent(String id)
+        {
+            return new Services.Left(id, this.User.PrimarySid().ToString());
+        }
+
+        #endregion
 
 
     }
