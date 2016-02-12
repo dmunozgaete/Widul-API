@@ -282,6 +282,8 @@ namespace API.Endpoints.Events.Models
 		
 		private int _total;
 		
+		private System.Collections.IEnumerable _items;
+		
 		public Pagination()
 		{
 		}
@@ -330,6 +332,22 @@ namespace API.Endpoints.Events.Models
 				if ((this._total != value))
 				{
 					this._total = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_items", CanBeNull=false)]
+		public System.Collections.IEnumerable items
+		{
+			get
+			{
+				return this._items;
+			}
+			set
+			{
+				if ((this._items != value))
+				{
+					this._items = value;
 				}
 			}
 		}

@@ -30,7 +30,8 @@ namespace API.Endpoints.Events
         /// <param name="newEvent">Model</param>
         /// <returns></returns>
         [HttpPost]
-        public IHttpActionResult Post(Models.NewEvent newEvent){
+        public IHttpActionResult Post(Models.NewEvent newEvent)
+        {
 
             return new Services.Create(this.User.PrimarySid(), newEvent);
         }
@@ -57,27 +58,15 @@ namespace API.Endpoints.Events
         /// <summary>
         /// Get all comments from specific event
         /// </summary>
-        /// <param name="id">Event guid</param>
+        /// <param name="id">Event Token</param>
+        /// <param name="offset">Offset</param>
+        /// <param name="limit">Limit</param>
         /// <returns></returns>
         [HttpGet]
         [HierarchicalRoute("/{id:Guid}/Comments")]
-        public IHttpActionResult GetComments(String id)
+        public IHttpActionResult GetComments(String id, int offset = 0, int limit = 10)
         {
-            //---------------------------------------------------------------------------
-            // Setting Static Values (Create a Base Gale Query Language Configuration)
-            var config = new Gale.REST.Queryable.OData.Builders.GQLConfiguration();
-
-            // Adding some Filter's ;)
-            config.filters.Add(new Gale.REST.Queryable.OData.Builders.GQLConfiguration.Filter()
-            {
-                field = "event_token",
-                operatorAlias = "eq",
-                value = id
-            });
-            //---------------------------------------------------------------------------
-
-            // Setup in the Queryable Endpoint
-            return new Gale.REST.Http.HttpQueryableActionResult<Models.VW_EventComment>(this.Request, config);
+            return new Services.Comments.Get(id, offset, limit);
         }
 
         /// <summary>

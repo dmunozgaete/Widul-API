@@ -38,34 +38,30 @@ namespace API.Endpoints.Events.Services
                 List<Models.FindedEvent> events = repo.GetModel<Models.FindedEvent>(1);
                 List<Models.FindedTag> tags = repo.GetModel<Models.FindedTag>(2);
 
+                pagination.items = (from t in events
+                                    select new
+                                    {
+                                        name = t.name,
+                                        token = t.token,
+                                        date = t.date,
+                                        description = t.description,
+                                        creator = new
+                                        {
+                                            name = t.creator_name,
+                                            photo = t.creator_photo,
+                                            token = t.creator_token
+                                        },
+                                        knowledge = new
+                                        {
+                                            name = t.knowledge_name,
+                                            token = t.knowledge_token
+                                        },
+                                        tags = (from tag in tags where tag.event_id == t.id select tag.name)
+                                    });
+
                 return Task.FromResult(new HttpResponseMessage()
                 {
-                    Content = new ObjectContent<Object>(new
-                    {
-                        limit = pagination.limit,
-                        offset = pagination.offset,
-                        total = pagination.total,
-                        items = (from t in events
-                                 select new
-                                 {
-                                     name = t.name,
-                                     token = t.token,
-                                     date = t.date,
-                                     description = t.description,
-                                     creator = new
-                                     {
-                                         name = t.creator_name,
-                                         photo = t.creator_photo,
-                                         token = t.creator_token
-                                     },
-                                     knowledge = new
-                                     {
-                                         name = t.knowledge_name,
-                                         token = t.knowledge_token
-                                     },
-                                     tags = (from tag in tags where tag.event_id == t.id select tag.name)
-                                 })
-                    },
+                    Content = new ObjectContent<Object>(pagination,
                       System.Web.Http.GlobalConfiguration.Configuration.Formatters.JsonFormatter
                     )
                 });
