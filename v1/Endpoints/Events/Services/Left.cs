@@ -8,22 +8,33 @@ using System.Web;
 
 namespace API.Endpoints.Events.Services
 {
+    /// <summary>
+    /// Remove the participant from the event
+    /// </summary>
     public class Left :Gale.REST.Http.HttpDeleteActionResult
     {
 
         String _user;
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="eventToken"></param>
+        /// <param name="user"></param>
         public Left(String eventToken, String user) : base(eventToken) {
-
 
             _user = user;
 
-
         }
 
+        /// <summary>
+        /// Async Proccess
+        /// </summary>
+        /// <param name="token"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public override Task<HttpResponseMessage> ExecuteAsync(string token, CancellationToken cancellationToken)
         {
-
 
             //------------------------------------------------
             // Guard's 
@@ -32,8 +43,8 @@ namespace API.Endpoints.Events.Services
 
             using (var svc = new Gale.Db.DataService("SP_DEL_LeftEvent"))
             {
-                svc.Parameters.Add("USR_Token", _user);
-                svc.Parameters.Add("EVN_Token", token);
+                svc.Parameters.Add("USER_Token", _user);
+                svc.Parameters.Add("EVNT_Token", token);
 
                 this.ExecuteAction(svc);
 
@@ -42,7 +53,6 @@ namespace API.Endpoints.Events.Services
                     StatusCode = System.Net.HttpStatusCode.OK
                 });
             }
-
 
         }
     }
