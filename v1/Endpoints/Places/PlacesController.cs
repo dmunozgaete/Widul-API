@@ -10,9 +10,9 @@ namespace API.Endpoints.Places
     /// Places Controller
     /// </summary>
     [Gale.Security.Oauth.Jwt.Authorize]
-    public class PlacesController :Gale.REST.RestController
+    public class PlacesController : Gale.REST.RestController
     {
-    
+
         /// <summary>
         /// Get all availables places
         /// </summary>
@@ -21,6 +21,16 @@ namespace API.Endpoints.Places
         public IHttpActionResult Get()
         {
             return new Gale.REST.Http.HttpQueryableActionResult<Models.Place>(this.Request);
+        }
+
+        /// <summary>
+        /// Get all availables places
+        /// </summary>
+        /// <returns></returns>
+        [HierarchicalRoute("{id:Guid}")]
+        public IHttpActionResult Get(String id)
+        {
+            return new Services.Get(id);
         }
 
         /// <summary>
