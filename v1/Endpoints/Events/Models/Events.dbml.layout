@@ -26,10 +26,10 @@
         <elementListCompartment Id="51b0a0ab-3b1e-4060-9b01-3c1d376c49e1" absoluteBounds="5.2650000000000006, 6.335, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="b98d6fa9-bc71-4979-a098-48757444acee" absoluteBounds="5.25, 0.5, 2, 4.6554182942708326">
+    <classShape Id="b98d6fa9-bc71-4979-a098-48757444acee" absoluteBounds="5.25, 0.5, 2, 4.8477197265625">
       <DataClassMoniker Name="/EventsDataContext/EventDetails" />
       <nestedChildShapes>
-        <elementListCompartment Id="9bca3d1e-8701-4ddf-ac4f-b462986d8dac" absoluteBounds="5.2650000000000006, 0.96, 1.9700000000000002, 4.095418294270833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="9bca3d1e-8701-4ddf-ac4f-b462986d8dac" absoluteBounds="5.2650000000000006, 0.96, 1.9700000000000002, 4.2877197265625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
     <classShape Id="1f3ca88c-9f58-4f6a-b07a-47ba4b25385b" absoluteBounds="0.5, 0.5, 2, 2.7324039713541666">

@@ -8,21 +8,29 @@ using System.Web;
 
 namespace API.Endpoints.Events.Services
 {
+    /// <summary>
+    /// Join to an Event
+    /// </summary>
     public class Join :Gale.REST.Http.HttpCreateActionResult<String>
     {
         String _user;
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="eventToken"></param>
+        /// <param name="user"></param>
         public Join(String eventToken,String user):base(eventToken) {
-
-
             _user = user;
-
-
         }
 
+        /// <summary>
+        /// Async Process
+        /// </summary>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public override Task<HttpResponseMessage> ExecuteAsync(CancellationToken cancellationToken)
         {
-
 
             //------------------------------------------------
             // Guard's 
@@ -34,21 +42,13 @@ namespace API.Endpoints.Events.Services
                 svc.Parameters.Add("USER_Token", _user);
                 svc.Parameters.Add("EVNT_Token", this.Model);
                
-                //this.ExecuteAction(svc);
-                Object hasToken = this.ExecuteScalar(svc);
-
-                Guid? newToken = null;
-
-                if (hasToken != null)
-                {
-                    newToken = (Guid)hasToken;
-                }
+                String state = (String)this.ExecuteScalar(svc);
 
                 return Task.FromResult(new HttpResponseMessage()
                 {
                     Content = new ObjectContent<Object>(new
                     {
-                        token = newToken
+                        state = state
                     },
                     new Gale.REST.Http.Formatter.KqlFormatter()),
                     StatusCode = System.Net.HttpStatusCode.Created

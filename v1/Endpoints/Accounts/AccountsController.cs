@@ -57,6 +57,33 @@ namespace API.Endpoints.Accounts
             return new Services.Get(this.User.PrimarySid());
         }
 
+        /// <summary>
+        /// Retrieve Account's Friends
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [Swashbuckle.Swagger.Annotations.SwaggerResponseRemoveDefaults]
+        [Swashbuckle.Swagger.Annotations.SwaggerResponse(HttpStatusCode.OK)]
+        [HierarchicalRoute("/Me/Friends")]
+        public IHttpActionResult MyFriends()
+        {
+            return new Gale.REST.Http.HttpQueryableActionResult<Models.VW_Users>(this.Request);
+        }
+
+
+        /// <summary>
+        /// Retrieve Account's Friends
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [Swashbuckle.Swagger.Annotations.SwaggerResponseRemoveDefaults]
+        [Swashbuckle.Swagger.Annotations.SwaggerResponse(HttpStatusCode.OK)]
+        [HierarchicalRoute("/{id:Guid}/Friends")]
+        public IHttpActionResult Friends(String id)
+        {
+            return new Gale.REST.Http.HttpQueryableActionResult<Models.VW_Users>(this.Request);
+        }
+
 
         /// <summary>
         /// Follow Accounts

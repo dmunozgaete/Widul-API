@@ -577,6 +577,8 @@ namespace API.Endpoints.Events.Models
 		
 		private List<Models.EventTag> _tags;
 		
+		private string _joined;
+		
 		public EventDetails()
 		{
 		}
@@ -897,6 +899,22 @@ namespace API.Endpoints.Events.Models
 				if ((this._tags != value))
 				{
 					this._tags = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="Joined", Storage="_joined", CanBeNull=false)]
+		public string joined
+		{
+			get
+			{
+				return this._joined;
+			}
+			set
+			{
+				if ((this._joined != value))
+				{
+					this._joined = value;
 				}
 			}
 		}

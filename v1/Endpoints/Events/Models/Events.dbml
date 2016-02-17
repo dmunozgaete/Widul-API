@@ -17,7 +17,7 @@
       <Column Name="Limit" Member="limit" Type="System.Int32" CanBeNull="false" />
       <Column Name="Offset" Member="offset" Type="System.Int32" CanBeNull="false" />
       <Column Name="Total" Member="total" Type="System.Int32" CanBeNull="false" />
-      <Column Member="items" Type="System.Collections.IEnumerable" CanBeNull="false" />
+      <Column Name="items" Type="System.Collections.IEnumerable" CanBeNull="false" />
     </Type>
   </Table>
   <Table Name="dbo.TB_WID_EventTag" Member="EventTag">
@@ -59,6 +59,7 @@
       <Column Name="place" Type="Models.Place" CanBeNull="false" />
       <Column Name="lastComments" Type="List&lt;Models.VW_EventComment&gt;" CanBeNull="false" />
       <Column Name="tags" Type="List&lt;Models.EventTag&gt;" CanBeNull="false" />
+      <Column Name="Joined" Member="joined" Type="System.String" CanBeNull="false" />
     </Type>
   </Table>
   <Table Name="dbo.VW_Events" Member="FindedEvent">
