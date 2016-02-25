@@ -30,6 +30,9 @@ namespace API.Endpoints.Events.Models
 		
     #region Definiciones de métodos de extensibilidad
     partial void OnCreated();
+    partial void InsertGuest(Guest instance);
+    partial void UpdateGuest(Guest instance);
+    partial void DeleteGuest(Guest instance);
     #endregion
 		
 		public EventsDataContext() : 
@@ -115,6 +118,14 @@ namespace API.Endpoints.Events.Models
 			get
 			{
 				return this.GetTable<FindedTag>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Guest> Guest
+		{
+			get
+			{
+				return this.GetTable<Guest>();
 			}
 		}
 	}
@@ -1150,6 +1161,164 @@ namespace API.Endpoints.Events.Models
 				{
 					this._event_id = value;
 				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TB_COR_User")]
+	public partial class Guest : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private System.Guid _token;
+		
+		private string _identifier;
+		
+		private string _email;
+		
+		private string _name;
+		
+		private System.Nullable<System.Guid> _photo;
+		
+    #region Definiciones de métodos de extensibilidad
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OntokenChanging(System.Guid value);
+    partial void OntokenChanged();
+    partial void OnidentifierChanging(string value);
+    partial void OnidentifierChanged();
+    partial void OnemailChanging(string value);
+    partial void OnemailChanged();
+    partial void OnfullnameChanging(string value);
+    partial void OnfullnameChanged();
+    partial void OnphotoChanging(System.Nullable<System.Guid> value);
+    partial void OnphotoChanged();
+    #endregion
+		
+		public Guest()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="ENTI_Token", Storage="_token", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
+		public System.Guid token
+		{
+			get
+			{
+				return this._token;
+			}
+			set
+			{
+				if ((this._token != value))
+				{
+					this.OntokenChanging(value);
+					this.SendPropertyChanging();
+					this._token = value;
+					this.SendPropertyChanged("token");
+					this.OntokenChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="ENTI_Identifier", Storage="_identifier", DbType="VarChar(200) NOT NULL", CanBeNull=false)]
+		public string identifier
+		{
+			get
+			{
+				return this._identifier;
+			}
+			set
+			{
+				if ((this._identifier != value))
+				{
+					this.OnidentifierChanging(value);
+					this.SendPropertyChanging();
+					this._identifier = value;
+					this.SendPropertyChanged("identifier");
+					this.OnidentifierChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="USER_Email", Storage="_email", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
+		public string email
+		{
+			get
+			{
+				return this._email;
+			}
+			set
+			{
+				if ((this._email != value))
+				{
+					this.OnemailChanging(value);
+					this.SendPropertyChanging();
+					this._email = value;
+					this.SendPropertyChanged("email");
+					this.OnemailChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="USER_FullName", Storage="_name", DbType="VarChar(250) NOT NULL", CanBeNull=false)]
+		public string fullname
+		{
+			get
+			{
+				return this._name;
+			}
+			set
+			{
+				if ((this._name != value))
+				{
+					this.OnfullnameChanging(value);
+					this.SendPropertyChanging();
+					this._name = value;
+					this.SendPropertyChanged("fullname");
+					this.OnfullnameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="USER_Photo", Storage="_photo", DbType="UniqueIdentifier NOT NULL")]
+		public System.Nullable<System.Guid> photo
+		{
+			get
+			{
+				return this._photo;
+			}
+			set
+			{
+				if ((this._photo != value))
+				{
+					this.OnphotoChanging(value);
+					this.SendPropertyChanging();
+					this._photo = value;
+					this.SendPropertyChanged("photo");
+					this.OnphotoChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
 	}

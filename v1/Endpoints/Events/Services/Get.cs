@@ -34,6 +34,13 @@ namespace API.Endpoints.Events.Services
                 //Get tables
                 Models.EventDetails eventDetail = repo.GetModel<Models.EventDetails>().FirstOrDefault();
 
+
+                //----------------------------------------------------------------------------------------------------
+                //Guard Exception's
+                Gale.Exception.RestException.Guard(() => eventDetail == null, "EVENT_DONT_EXISTS", API.Errors.ResourceManager);
+                //----------------------------------------------------------------------------------------------------
+
+
                 //Setting Values ;)!
                 eventDetail.lastComments = repo.GetModel<Models.VW_EventComment>(1);
                 eventDetail.tags = repo.GetModel<Models.EventTag>(2);

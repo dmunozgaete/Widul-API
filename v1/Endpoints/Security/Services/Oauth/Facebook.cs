@@ -18,13 +18,13 @@ namespace API.Endpoints.Security.Services.Oauth
         HttpRequestMessage _request;    //Only for Content Negotiation
         private string _host;
 
-/// <summary>
-/// 
-/// </summary>
-/// <param name="request"></param>
-/// <param name="host"></param>
-/// <param name="credentials"></param>
-        public Facebook(HttpRequestMessage request,String host, Models.FacebookCredentials credentials)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="host"></param>
+        /// <param name="credentials"></param>
+        public Facebook(HttpRequestMessage request, String host, Models.FacebookCredentials credentials)
             : base(credentials)
         {
             _request = request;
@@ -36,11 +36,11 @@ namespace API.Endpoints.Security.Services.Oauth
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        private string TemplateBody(dynamic model)
+        private string RenderView(dynamic model)
         {
             //----------------------------------
             var assembly = this.GetType().Assembly;
-            String resourcePath = "API.Endpoints.Security.Templates.Mail.Welcome.cshtml";
+            String resourcePath = "API.Endpoints.Security.Templates.Welcome.cshtml";
 
             using (System.IO.Stream stream = assembly.GetManifestResourceStream(resourcePath))
             {
@@ -112,26 +112,31 @@ namespace API.Endpoints.Security.Services.Oauth
 
                 //------------------------------------------------------------------------------------------------------------------------
                 //GUARD EXCEPTION
-                if (status.isNew) { 
-                                   
-                    //----------------------------------------------------------------------
-                    //Send an Welcome Email//Wrap the Message
-                    MailMessage message = new MailMessage()
+                if (status.isNew)
+                {
+                    //TODO: Send Mail in Async (Fire && Forget)
+                    //http://stackoverflow.com/questions/22864367/fire-and-forget-approach
+                    //http://stackoverflow.com/questions/22301852/sending-two-emails-async-from-webapi
+                    Task.Factory.StartNew(() =>
                     {
-                        IsBodyHtml = true,
-                        From = new MailAddress(System.Configuration.ConfigurationManager.AppSettings["Mail:Account"]),
-                        Subject = Endpoints.Security.Templates.Mail.Mail.Register_Subject,
-                        Body = TemplateBody(new
+                        //----------------------------------------------------------------------
+                        //Welcome Email
+                        MailMessage message = new MailMessage()
                         {
-                            Name = Model.name,
-                            Url = String.Format("{0}#/public/home", this._host)
-                        })
-                    };
-                    message.To.Add(new MailAddress(Model.email));
-                    SmtpClient client = new SmtpClient();
-                    client.Send(message);
-                    //----------------------------------------------------------------------
-
+                            IsBodyHtml = true,
+                            From = new MailAddress(System.Configuration.ConfigurationManager.AppSettings["Mail:Account"]),
+                            Subject = Templates.Mail.Welcome_Subject,
+                            Body = RenderView(new
+                            {
+                                Name = Model.name,
+                                Url = String.Format("{0}#/public/home", this._host)
+                            })
+                        };
+                        message.To.Add(new MailAddress(Model.email));
+                        SmtpClient client = new SmtpClient();
+                        client.Send(message);
+                        //----------------------------------------------------------------------
+                    });
                 }
                 //------------------------------------------------------------------------------------------------------------------------
 

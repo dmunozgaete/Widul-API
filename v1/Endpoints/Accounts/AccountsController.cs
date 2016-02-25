@@ -21,7 +21,7 @@ namespace API.Endpoints.Accounts
         /// <returns></returns>
         [Swashbuckle.Swagger.Annotations.SwaggerResponseRemoveDefaults]
         [Swashbuckle.Swagger.Annotations.SwaggerResponse(HttpStatusCode.OK)]
-        [Gale.Security.Oauth.Jwt.Authorize(Roles = API.WebApiConfig.RootRoles)]
+        [Gale.Security.Oauth.Jwt.Authorize()]
         public IHttpActionResult Get()
         {
             return new Gale.REST.Http.HttpQueryableActionResult<Models.VW_Users>(this.Request);
@@ -65,9 +65,9 @@ namespace API.Endpoints.Accounts
         [Swashbuckle.Swagger.Annotations.SwaggerResponseRemoveDefaults]
         [Swashbuckle.Swagger.Annotations.SwaggerResponse(HttpStatusCode.OK)]
         [HierarchicalRoute("/Me/Friends")]
-        public IHttpActionResult MyFriends()
+        public IHttpActionResult MyFriends(String q="", int limit = 10, int offset = 0)
         {
-            return new Gale.REST.Http.HttpQueryableActionResult<Models.VW_Users>(this.Request);
+            return new Services.Friends(this.User.PrimarySid(), q, offset, limit);
         }
 
 
@@ -79,9 +79,9 @@ namespace API.Endpoints.Accounts
         [Swashbuckle.Swagger.Annotations.SwaggerResponseRemoveDefaults]
         [Swashbuckle.Swagger.Annotations.SwaggerResponse(HttpStatusCode.OK)]
         [HierarchicalRoute("/{id:Guid}/Friends")]
-        public IHttpActionResult Friends(String id)
+        public IHttpActionResult Friends(String id, String q="", int limit = 10, int offset = 0)
         {
-            return new Gale.REST.Http.HttpQueryableActionResult<Models.VW_Users>(this.Request);
+            return new Services.Friends(id, q, offset, limit);
         }
 
 

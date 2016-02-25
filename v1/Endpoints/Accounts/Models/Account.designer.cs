@@ -39,6 +39,9 @@ namespace API.Endpoints.Accounts.Models
     partial void InsertRole(Role instance);
     partial void UpdateRole(Role instance);
     partial void DeleteRole(Role instance);
+    partial void InsertFriend(Friend instance);
+    partial void UpdateFriend(Friend instance);
+    partial void DeleteFriend(Friend instance);
     #endregion
 		
 		public AccountDataContext() : 
@@ -92,6 +95,22 @@ namespace API.Endpoints.Accounts.Models
 			get
 			{
 				return this.GetTable<Role>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Pagination> Pagination
+		{
+			get
+			{
+				return this.GetTable<Pagination>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Friend> Friend
+		{
+			get
+			{
+				return this.GetTable<Friend>();
 			}
 		}
 	}
@@ -737,6 +756,221 @@ namespace API.Endpoints.Accounts.Models
 					this._name = value;
 					this.SendPropertyChanged("name");
 					this.OnnameChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="")]
+	public partial class Pagination
+	{
+		
+		private int _limit;
+		
+		private int _offset;
+		
+		private int _total;
+		
+		private System.Collections.IEnumerable _items;
+		
+		public Pagination()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="Limit", Storage="_limit")]
+		public int limit
+		{
+			get
+			{
+				return this._limit;
+			}
+			set
+			{
+				if ((this._limit != value))
+				{
+					this._limit = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="Offset", Storage="_offset")]
+		public int offset
+		{
+			get
+			{
+				return this._offset;
+			}
+			set
+			{
+				if ((this._offset != value))
+				{
+					this._offset = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="Total", Storage="_total")]
+		public int total
+		{
+			get
+			{
+				return this._total;
+			}
+			set
+			{
+				if ((this._total != value))
+				{
+					this._total = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_items", CanBeNull=false)]
+		public System.Collections.IEnumerable items
+		{
+			get
+			{
+				return this._items;
+			}
+			set
+			{
+				if ((this._items != value))
+				{
+					this._items = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TB_COR_User")]
+	public partial class Friend : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private System.Guid _token;
+		
+		private string _email;
+		
+		private string _name;
+		
+		private System.Nullable<System.Guid> _photo;
+		
+    #region Definiciones de métodos de extensibilidad
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OntokenChanging(System.Guid value);
+    partial void OntokenChanged();
+    partial void OnemailChanging(string value);
+    partial void OnemailChanged();
+    partial void OnfullnameChanging(string value);
+    partial void OnfullnameChanged();
+    partial void OnphotoChanging(System.Nullable<System.Guid> value);
+    partial void OnphotoChanged();
+    #endregion
+		
+		public Friend()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="ENTI_Token", Storage="_token", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
+		public System.Guid token
+		{
+			get
+			{
+				return this._token;
+			}
+			set
+			{
+				if ((this._token != value))
+				{
+					this.OntokenChanging(value);
+					this.SendPropertyChanging();
+					this._token = value;
+					this.SendPropertyChanged("token");
+					this.OntokenChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="USER_Email", Storage="_email", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
+		public string email
+		{
+			get
+			{
+				return this._email;
+			}
+			set
+			{
+				if ((this._email != value))
+				{
+					this.OnemailChanging(value);
+					this.SendPropertyChanging();
+					this._email = value;
+					this.SendPropertyChanged("email");
+					this.OnemailChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="USER_FullName", Storage="_name", DbType="VarChar(250) NOT NULL", CanBeNull=false)]
+		public string fullname
+		{
+			get
+			{
+				return this._name;
+			}
+			set
+			{
+				if ((this._name != value))
+				{
+					this.OnfullnameChanging(value);
+					this.SendPropertyChanging();
+					this._name = value;
+					this.SendPropertyChanged("fullname");
+					this.OnfullnameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="USER_Photo", Storage="_photo", DbType="UniqueIdentifier NOT NULL")]
+		public System.Nullable<System.Guid> photo
+		{
+			get
+			{
+				return this._photo;
+			}
+			set
+			{
+				if ((this._photo != value))
+				{
+					this.OnphotoChanging(value);
+					this.SendPropertyChanging();
+					this._photo = value;
+					this.SendPropertyChanged("photo");
+					this.OnphotoChanged();
 				}
 			}
 		}

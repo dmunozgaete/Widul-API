@@ -130,5 +130,23 @@ namespace API.Endpoints.Events
         }
 
         #endregion
+
+        #region --> INVITES
+        /// <summary>
+        /// Invites User's to Join the Event (via Email And Notification)
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="guests"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [HierarchicalRoute("/{id:Guid}/Invitations")]
+        [Gale.Security.Oauth.Jwt.Authorize]
+        public IHttpActionResult CreateInvitations(String id, List<String> guests)
+        {
+            var me = this.User.PrimarySid().ToString();
+            string host = this.Request.Headers.Referrer.ToString();
+            return new Services.Invitations.Create(id, me, guests, host);
+        }
+        #endregion
     }
 }

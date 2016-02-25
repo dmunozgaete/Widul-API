@@ -39,29 +39,6 @@ namespace API.Endpoints.Security
 
         }
 
-        /// <summary>
-        /// Authorize via Google
-        /// </summary>
-        /// <param name="credentials">facebook data</param>
-        /// <returns></returns>
-        /// <response code="200">Authorized</response>
-        /// <response code="500">Incorrect Access Token</response>
-        [HttpPost]
-        [HierarchicalRoute("/Oauth/Google")]
-        public IHttpActionResult Authorize([FromBody]Models.GoogleCredentials credentials)
-        {
-
-            //------------------------------------------------------------------------------------------------------------------------
-            //GUARD EXCEPTION
-            Gale.Exception.RestException.Guard(() => credentials == null, "EMPTY_BODY", API.Errors.ResourceManager);
-            Gale.Exception.RestException.Guard(() => credentials.accessToken == null, "EMPTY_ACCESSTOKEN", API.Errors.ResourceManager);
-            Gale.Exception.RestException.Guard(() => credentials.email == null, "EMPTY_EMAIL", API.Errors.ResourceManager);
-            //------------------------------------------------------------------------------------------------------------------------
-
-            return new Services.Oauth.Google(this.Request, credentials);
-
-        }
-
         #endregion
 
     }

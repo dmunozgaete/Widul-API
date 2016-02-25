@@ -114,13 +114,9 @@
       <DependentUpon>Account.dbml</DependentUpon>
     </Compile>
     <Compile Include="Endpoints\Accounts\Services\Follow.cs" />
+    <Compile Include="Endpoints\Accounts\Services\Friends.cs" />
     <Compile Include="Endpoints\Accounts\Services\Get.cs" />
     <Compile Include="Endpoints\Accounts\Services\Unfollow.cs" />
-    <Compile Include="Endpoints\Accounts\Templates\Mail\Mail.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Mail.resx</DependentUpon>
-    </Compile>
     <Compile Include="Endpoints\Bpm\DocumentsController.cs" />
     <Compile Include="Endpoints\Bpm\Models\Document.designer.cs">
       <AutoGen>True</AutoGen>
@@ -157,9 +153,15 @@
     <Compile Include="Endpoints\Events\Services\Comments\Get.cs" />
     <Compile Include="Endpoints\Events\Services\Create.cs" />
     <Compile Include="Endpoints\Events\Services\Get.cs" />
+    <Compile Include="Endpoints\Events\Services\Invitations\Create.cs" />
     <Compile Include="Endpoints\Events\Services\Join.cs" />
     <Compile Include="Endpoints\Events\Services\Left.cs" />
     <Compile Include="Endpoints\Events\Services\Search.cs" />
+    <Compile Include="Endpoints\Events\Templates\Mail.Designer.cs">
+      <DependentUpon>Mail.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Endpoints\Files\FilesController.cs" />
     <Compile Include="Endpoints\Files\Models\File.designer.cs">
       <AutoGen>True</AutoGen>
@@ -210,8 +212,7 @@
     </Compile>
     <Compile Include="Endpoints\Security\SecurityController.cs" />
     <Compile Include="Endpoints\Security\Services\Oauth\Facebook.cs" />
-    <Compile Include="Endpoints\Security\Services\Oauth\Google.cs" />
-    <Compile Include="Endpoints\Security\Templates\Mail\Mail.Designer.cs">
+    <Compile Include="Endpoints\Security\Templates\Mail.Designer.cs">
       <DependentUpon>Mail.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -263,7 +264,6 @@
       <LastGenOutput>Security.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </Content>
-    <EmbeddedResource Include="Endpoints\Accounts\Templates\Mail\Welcome.cshtml" />
     <Content Include="Endpoints\Places\Models\Places.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Places.designer.cs</LastGenOutput>
@@ -289,7 +289,12 @@
       <LastGenOutput>KnowledgeRequests.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </Content>
-    <EmbeddedResource Include="Endpoints\Security\Templates\Mail\Welcome.cshtml" />
+    <EmbeddedResource Include="Endpoints\Events\Templates\Mail.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Mail.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Endpoints\Security\Templates\Welcome.cshtml" />
+    <EmbeddedResource Include="Endpoints\Events\Templates\Invitation.cshtml" />
     <None Include="Properties\PublishProfiles\QAS.pubxml" />
     <None Include="Properties\PublishProfiles\QAS_Valentys.pubxml" />
     <None Include="Web.Debug.config">
@@ -325,10 +330,6 @@
     <None Include="Endpoints\Security\Models\Security.dbml.layout">
       <DependentUpon>Security.dbml</DependentUpon>
     </None>
-    <EmbeddedResource Include="Endpoints\Accounts\Templates\Mail\Mail.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Mail.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
     <None Include="Endpoints\Places\Models\Places.dbml.layout">
       <DependentUpon>Places.dbml</DependentUpon>
     </None>
@@ -348,7 +349,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Security.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Endpoints\Security\Templates\Mail\Mail.resx">
+    <EmbeddedResource Include="Endpoints\Security\Templates\Mail.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Mail.Designer.cs</LastGenOutput>
     </EmbeddedResource>
