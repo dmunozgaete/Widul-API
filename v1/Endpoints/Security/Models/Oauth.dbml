@@ -17,4 +17,9 @@
       <Column Name="image" Type="System.String" CanBeNull="false" />
     </Type>
   </Table>
+  <Table Name="" Member="Status">
+    <Type Name="Status">
+      <Column Name="IsNew" Member="isNew" Type="System.Boolean" CanBeNull="false" />
+    </Type>
+  </Table>
 </Database>

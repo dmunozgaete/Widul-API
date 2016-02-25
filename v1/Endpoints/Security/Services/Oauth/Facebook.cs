@@ -1,8 +1,10 @@
-﻿using System;
+﻿using RazorTemplates.Core;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Mail;
 using System.Threading.Tasks;
 using System.Web;
 
@@ -14,16 +16,46 @@ namespace API.Endpoints.Security.Services.Oauth
     public class Facebook : Gale.REST.Http.HttpCreateActionResult<Models.FacebookCredentials>
     {
         HttpRequestMessage _request;    //Only for Content Negotiation
+        private string _host;
 
-        /// <summary>
-        /// Constructor
-        /// </summary>
-        /// <param name="request"></param>
-        /// <param name="credentials"></param>
-        public Facebook(HttpRequestMessage request, Models.FacebookCredentials credentials)
+/// <summary>
+/// 
+/// </summary>
+/// <param name="request"></param>
+/// <param name="host"></param>
+/// <param name="credentials"></param>
+        public Facebook(HttpRequestMessage request,String host, Models.FacebookCredentials credentials)
             : base(credentials)
         {
             _request = request;
+            _host = host;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        private string TemplateBody(dynamic model)
+        {
+            //----------------------------------
+            var assembly = this.GetType().Assembly;
+            String resourcePath = "API.Endpoints.Security.Templates.Mail.Welcome.cshtml";
+
+            using (System.IO.Stream stream = assembly.GetManifestResourceStream(resourcePath))
+            {
+                //------------------------------------------------------------------------------------------------------
+                // GUARD EXCEPTIONS
+                Gale.Exception.RestException.Guard(() => stream == null, "TEMPLATE_DONT_EXIST", API.Errors.ResourceManager);
+                //------------------------------------------------------------------------------------------------------
+
+                using (System.IO.StreamReader reader = new System.IO.StreamReader(stream))
+                {
+                    var view = Template.Compile(reader.ReadToEnd());
+                    return view.Render(model);
+                }
+            }
+            //----------------------------------
         }
 
 
@@ -68,13 +100,41 @@ namespace API.Endpoints.Security.Services.Oauth
 
                 Gale.Db.EntityRepository rep = this.ExecuteQuery(svc);
 
-                Models.Account user = rep.GetModel<Models.Account>().FirstOrDefault();
-                Gale.Db.EntityTable<Models.Role> profiles = rep.GetModel<Models.Role>(1);
+                Models.Status status = rep.GetModel<Models.Status>().FirstOrDefault();
+                Models.Account user = rep.GetModel<Models.Account>(1).FirstOrDefault();
+                Gale.Db.EntityTable<Models.Role> profiles = rep.GetModel<Models.Role>(2);
 
                 //------------------------------------------------------------------------------------------------------------------------
                 //GUARD EXCEPTION
                 Gale.Exception.RestException.Guard(() => user == null, "USERNAME_OR_PASSWORD_INCORRECT", Resources.Security.ResourceManager);
                 //------------------------------------------------------------------------------------------------------------------------
+
+
+                //------------------------------------------------------------------------------------------------------------------------
+                //GUARD EXCEPTION
+                if (status.isNew) { 
+                                   
+                    //----------------------------------------------------------------------
+                    //Send an Welcome Email//Wrap the Message
+                    MailMessage message = new MailMessage()
+                    {
+                        IsBodyHtml = true,
+                        From = new MailAddress(System.Configuration.ConfigurationManager.AppSettings["Mail:Account"]),
+                        Subject = Endpoints.Security.Templates.Mail.Mail.Register_Subject,
+                        Body = TemplateBody(new
+                        {
+                            Name = Model.name,
+                            Url = String.Format("{0}#/public/home", this._host)
+                        })
+                    };
+                    message.To.Add(new MailAddress(Model.email));
+                    SmtpClient client = new SmtpClient();
+                    client.Send(message);
+                    //----------------------------------------------------------------------
+
+                }
+                //------------------------------------------------------------------------------------------------------------------------
+
 
                 List<System.Security.Claims.Claim> claims = new List<System.Security.Claims.Claim>();
 

@@ -211,6 +211,11 @@
     <Compile Include="Endpoints\Security\SecurityController.cs" />
     <Compile Include="Endpoints\Security\Services\Oauth\Facebook.cs" />
     <Compile Include="Endpoints\Security\Services\Oauth\Google.cs" />
+    <Compile Include="Endpoints\Security\Templates\Mail\Mail.Designer.cs">
+      <DependentUpon>Mail.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Errors.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -284,6 +289,7 @@
       <LastGenOutput>KnowledgeRequests.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </Content>
+    <EmbeddedResource Include="Endpoints\Security\Templates\Mail\Welcome.cshtml" />
     <None Include="Properties\PublishProfiles\QAS.pubxml" />
     <None Include="Properties\PublishProfiles\QAS_Valentys.pubxml" />
     <None Include="Web.Debug.config">
@@ -341,6 +347,10 @@
     <EmbeddedResource Include="Endpoints\Security\Resources\Security.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Security.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Endpoints\Security\Templates\Mail\Mail.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Mail.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Errors.resx">
       <Generator>ResXFileCodeGenerator</Generator>

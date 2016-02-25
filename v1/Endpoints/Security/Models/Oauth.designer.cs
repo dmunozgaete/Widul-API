@@ -70,6 +70,14 @@ namespace API.Endpoints.Security.Models
 				return this.GetTable<GoogleCredentials>();
 			}
 		}
+		
+		public System.Data.Linq.Table<Status> Status
+		{
+			get
+			{
+				return this.GetTable<Status>();
+			}
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="")]
@@ -265,6 +273,33 @@ namespace API.Endpoints.Security.Models
 				if ((this._image != value))
 				{
 					this._image = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="")]
+	public partial class Status
+	{
+		
+		private bool _isNew;
+		
+		public Status()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="IsNew", Storage="_isNew")]
+		public bool isNew
+		{
+			get
+			{
+				return this._isNew;
+			}
+			set
+			{
+				if ((this._isNew != value))
+				{
+					this._isNew = value;
 				}
 			}
 		}

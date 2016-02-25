@@ -34,7 +34,8 @@ namespace API.Endpoints.Security
             Gale.Exception.RestException.Guard(() => credentials.email == null, "EMPTY_EMAIL", API.Errors.ResourceManager);
             //------------------------------------------------------------------------------------------------------------------------
 
-            return new Services.Oauth.Facebook(this.Request, credentials);
+            string host = this.Request.Headers.Referrer.ToString();
+            return new Services.Oauth.Facebook(this.Request, host, credentials);
 
         }
 
