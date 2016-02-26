@@ -60,7 +60,7 @@ namespace API.Endpoints.Events
         }
         #endregion
 
-        #region --> TAGS 
+        #region --> TAGS
 
         /// <summary>
         /// Get all Events
@@ -165,6 +165,22 @@ namespace API.Endpoints.Events
         [HierarchicalRoute("/{id:Guid}/Invitations")]
         [Gale.Security.Oauth.Jwt.Authorize]
         public IHttpActionResult CreateInvitations(String id, List<String> guests)
+        {
+            var me = this.User.PrimarySid().ToString();
+            string host = this.Request.Headers.Referrer.ToString();
+            return new Services.Invitations.Create(id, me, guests, host);
+        }
+
+        /// <summary>
+        /// Test Mail (Only for Root Roles)
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="emailTo"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [HierarchicalRoute("/{id:Guid}/Invitations/Test")]
+        [Gale.Security.Oauth.Jwt.Authorize(Roles = WebApiConfig.RootRoles)]
+        public IHttpActionResult TestInvitation(String id, [FromUri]List<String> guests)
         {
             var me = this.User.PrimarySid().ToString();
             string host = this.Request.Headers.Referrer.ToString();

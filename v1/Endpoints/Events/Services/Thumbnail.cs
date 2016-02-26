@@ -176,8 +176,6 @@ namespace API.Endpoints.Events.Services
                 //Setting Values ;)!
                 eventDetail.place = repo.GetModel<Models.Place>(3).FirstOrDefault();
 
-
-
                 string imageUrl = String.Format(
                     "http://maps.google.com/maps/api/staticmap?size=1200x630&markers=color:red|{0},{1}",
                     eventDetail.place.lat,

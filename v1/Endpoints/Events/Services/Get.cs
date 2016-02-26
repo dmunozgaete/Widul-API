@@ -39,7 +39,6 @@ namespace API.Endpoints.Events.Services
                 Gale.Exception.RestException.Guard(() => eventDetail == null, "EVENT_DONT_EXISTS", API.Errors.ResourceManager);
                 //----------------------------------------------------------------------------------------------------
 
-
                 //Setting Values ;)!
                 eventDetail.comments_latest = repo.GetModel<Models.VW_EventComment>(1);
                 eventDetail.tags = repo.GetModel<Models.EventTag>(2);
