@@ -9,7 +9,6 @@ namespace API.Endpoints.Events
     /// <summary>
     /// Event Controller
     /// </summary>
-    [Gale.Security.Oauth.Jwt.Authorize]
     public class EventsController : Gale.REST.RestController
     {
         #region EVENT
@@ -25,15 +24,39 @@ namespace API.Endpoints.Events
         }
 
         /// <summary>
+        /// Get Event Details
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [Gale.Security.Oauth.Jwt.Authorize]
+        [HierarchicalRoute("{id:Guid}/Personal")]
+        public IHttpActionResult Personal(Guid id)
+        {
+            return new Services.Personal(id.ToString(), this.User.PrimarySid());
+        }
+
+        /// <summary>
         /// Create a Event
         /// </summary>
         /// <param name="newEvent">Model</param>
         /// <returns></returns>
         [HttpPost]
+        [Gale.Security.Oauth.Jwt.Authorize]
         public IHttpActionResult Post(Models.NewEvent newEvent)
         {
 
             return new Services.Create(this.User.PrimarySid(), newEvent);
+        }
+
+        /// <summary>
+        /// Build a Thumbnails for the Event (For Sharing via Social)
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [HierarchicalRoute("{id:Guid}/Thumbnail")]
+        public IHttpActionResult Thumbnail(String id)
+        {
+            return new Services.Thumbnail(id);
         }
         #endregion
 

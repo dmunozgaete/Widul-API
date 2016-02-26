@@ -152,11 +152,13 @@
     <Compile Include="Endpoints\Events\Services\Comments\Create.cs" />
     <Compile Include="Endpoints\Events\Services\Comments\Get.cs" />
     <Compile Include="Endpoints\Events\Services\Create.cs" />
+    <Compile Include="Endpoints\Events\Services\Personal.cs" />
     <Compile Include="Endpoints\Events\Services\Get.cs" />
     <Compile Include="Endpoints\Events\Services\Invitations\Create.cs" />
     <Compile Include="Endpoints\Events\Services\Join.cs" />
     <Compile Include="Endpoints\Events\Services\Left.cs" />
     <Compile Include="Endpoints\Events\Services\Search.cs" />
+    <Compile Include="Endpoints\Events\Services\Thumbnail.cs" />
     <Compile Include="Endpoints\Events\Templates\Mail.Designer.cs">
       <DependentUpon>Mail.resx</DependentUpon>
       <AutoGen>True</AutoGen>

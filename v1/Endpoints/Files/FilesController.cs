@@ -13,7 +13,6 @@ namespace API.Endpoints.Files
     /// <summary>
     /// File API
     /// </summary>
-    [Gale.Security.Oauth.Jwt.Authorize]
     public class FilesController : Gale.REST.RestController
     {
 
@@ -31,6 +30,7 @@ namespace API.Endpoints.Files
         /// Create a Temporary File  (Must be Change the flag to permanently after)
         /// </summary>
         /// <returns></returns>
+        [Gale.Security.Oauth.Jwt.Authorize]
         public IHttpActionResult Post()
         {
             return new Services.Upload(this.Request, User.PrimarySid());

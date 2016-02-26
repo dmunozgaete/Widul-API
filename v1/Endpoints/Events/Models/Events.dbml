@@ -51,15 +51,17 @@
       <Column Name="USER_FullName" Member="creator_name" Type="System.String" DbType="VarChar(250) NOT NULL" CanBeNull="false" />
       <Column Name="USER_Token" Member="creator_token" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
       <Column Name="USER_Photo" Member="creator_photo" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
-      <Column Name="Following" Member="creator_following" Type="System.Boolean" CanBeNull="false" />
       <Column Name="USCO_Following" Member="creator_followings" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="USCO_Followers" Member="creator_followers" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="KNOW_Name" Member="knowledge_name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="KNOW_Token" Member="knowledge_token" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
       <Column Name="place" Type="Models.Place" CanBeNull="false" />
-      <Column Name="lastComments" Type="List&lt;Models.VW_EventComment&gt;" CanBeNull="false" />
       <Column Name="tags" Type="List&lt;Models.EventTag&gt;" CanBeNull="false" />
-      <Column Name="Joined" Member="joined" Type="System.String" CanBeNull="false" />
+      <Column Name="Guests" Member="participants_guests" Type="System.Int32" CanBeNull="false" />
+      <Column Name="Participants" Member="participants_confirmed" Type="System.Int32" CanBeNull="false" />
+      <Column Name="participants_tops" Type="List&lt;Models.TopParticipant&gt;" CanBeNull="false" />
+      <Column Name="TotalComments" Member="comments_total" Type="System.Int32" CanBeNull="false" />
+      <Column Name="comments_latest" Type="List&lt;Models.VW_EventComment&gt;" CanBeNull="false" />
     </Type>
   </Table>
   <Table Name="dbo.VW_Events" Member="FindedEvent">
@@ -85,10 +87,23 @@
   <Table Name="dbo.TB_COR_User" Member="Guest">
     <Type Name="Guest">
       <Column Name="ENTI_Token" Member="token" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="ENTI_Identifier" Member="identifier" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
       <Column Name="USER_Email" Member="email" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
       <Column Name="USER_FullName" Member="fullname" Storage="_name" Type="System.String" DbType="VarChar(250) NOT NULL" CanBeNull="false" />
       <Column Name="USER_Photo" Member="photo" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TB_COR_User" Member="TopParticipant">
+    <Type Name="TopParticipant">
+      <Column Name="ENTI_Token" Member="token" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="USER_FullName" Member="fullname" Storage="_name" Type="System.String" DbType="VarChar(250) NOT NULL" CanBeNull="false" />
+      <Column Name="USER_Photo" Member="photo" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.VW_Events" Member="EventPersonals">
+    <Type Name="EventPersonal">
+      <Column Name="DOCU_Token" Member="token" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="Following" Member="creator_following" Type="System.Boolean" CanBeNull="false" />
+      <Column Name="Participation" Member="participation_state" Storage="_joined" Type="System.String" CanBeNull="false" />
     </Type>
   </Table>
 </Database>

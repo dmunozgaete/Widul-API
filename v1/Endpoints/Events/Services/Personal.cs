@@ -8,16 +8,21 @@ using System.Web;
 namespace API.Endpoints.Events.Services
 {
     /// <summary>
-    /// Get Event Details
+    /// Get Event Personal Details 
     /// </summary>
-    public class Get : Gale.REST.Http.HttpReadActionResult<String>
+    public class Personal : Gale.REST.Http.HttpReadActionResult<String>
     {
-       
+        String _user = null;
+
         /// <summary>
         /// Get Event Details
         /// </summary>
         /// <param name="id">Event Token</param>
-        public Get(string id) : base(id) {}
+        public Personal(string id, String user)
+            : base(id)
+        {
+            _user = user;
+        }
 
         /// <summary>
         /// Async Process
@@ -26,29 +31,25 @@ namespace API.Endpoints.Events.Services
         /// <returns></returns>
         public override Task<HttpResponseMessage> ExecuteAsync(System.Threading.CancellationToken cancellationToken)
         {
-            using (var svc = new Gale.Db.DataService("SP_GET_Event"))
+            using (var svc = new Gale.Db.DataService("SP_GET_EventPersonal"))
             {
                 svc.Parameters.Add("EVNT_Token", this.Model);
+                svc.Parameters.Add("USER_Token", _user);
+
                 Gale.Db.EntityRepository repo = this.ExecuteQuery(svc);
 
                 //Get tables
-                Models.EventDetails eventDetail = repo.GetModel<Models.EventDetails>().FirstOrDefault();
+                Models.EventPersonal eventPersonal = repo.GetModel<Models.EventPersonal>().FirstOrDefault();
 
                 //----------------------------------------------------------------------------------------------------
                 //Guard Exception's
-                Gale.Exception.RestException.Guard(() => eventDetail == null, "EVENT_DONT_EXISTS", API.Errors.ResourceManager);
+                Gale.Exception.RestException.Guard(() => eventPersonal == null, "EVENT_DONT_EXISTS", API.Errors.ResourceManager);
                 //----------------------------------------------------------------------------------------------------
 
-
-                //Setting Values ;)!
-                eventDetail.comments_latest = repo.GetModel<Models.VW_EventComment>(1);
-                eventDetail.tags = repo.GetModel<Models.EventTag>(2);
-                eventDetail.place = repo.GetModel<Models.Place>(3).FirstOrDefault();
-                eventDetail.participants_tops = repo.GetModel<Models.TopParticipant>(4);
-
+                //Setting Values ;)!                
                 return Task.FromResult(new HttpResponseMessage()
                 {
-                    Content = new ObjectContent<Models.EventDetails>(eventDetail,
+                    Content = new ObjectContent<Models.EventPersonal>(eventPersonal,
                         new Gale.REST.Http.Formatter.KqlFormatter()
                     )
                 });

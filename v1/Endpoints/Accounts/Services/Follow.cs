@@ -28,6 +28,8 @@ namespace API.Endpoints.Accounts.Services
         /// <returns></returns>
         public override Task<HttpResponseMessage> ExecuteAsync(string token, System.Threading.CancellationToken cancellationToken)
         {
+
+
             using (Gale.Db.DataService svc = new Gale.Db.DataService("[SP_INS_FollowAccount]"))
             {
                 svc.Parameters.Add("USER_Token", token);

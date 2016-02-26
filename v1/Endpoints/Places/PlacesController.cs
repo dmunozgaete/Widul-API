@@ -9,7 +9,6 @@ namespace API.Endpoints.Places
     /// <summary>
     /// Places Controller
     /// </summary>
-    [Gale.Security.Oauth.Jwt.Authorize]
     public class PlacesController : Gale.REST.RestController
     {
 
@@ -17,6 +16,7 @@ namespace API.Endpoints.Places
         /// Get all availables places
         /// </summary>
         /// <returns></returns>
+        [Gale.Security.Oauth.Jwt.Authorize]
         [Swashbuckle.Swagger.Annotations.QueryableEndpoint(typeof(Models.Place))]
         public IHttpActionResult Get()
         {
@@ -37,6 +37,7 @@ namespace API.Endpoints.Places
         /// Add New Place
         /// </summary>
         /// <returns></returns>
+        [Gale.Security.Oauth.Jwt.Authorize]
         public IHttpActionResult Post(Models.NewPlace newPlace)
         {
             return new Services.Create(this.User.PrimarySid(), newPlace);
