@@ -12,7 +12,7 @@ namespace API.Endpoints.Security
     /// </summary>
     public class SecurityController : Gale.REST.RestController
     {
-   
+
         #region SOCIAL AUTHENTICATOR'S
 
         /// <summary>
@@ -38,6 +38,36 @@ namespace API.Endpoints.Security
             return new Services.Oauth.Facebook(this.Request, host, credentials);
 
         }
+
+        /// <summary>
+        /// Test Mail (Only for Root Roles)
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="emails"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [HierarchicalRoute("/Mail/Welcome")]
+        [Gale.Security.Oauth.Jwt.Authorize(Roles = WebApiConfig.RootRoles)]
+        public void TestInvitation([FromUri]List<String> emails)
+        {
+
+            string host = this.Request.Headers.Referrer.ToString();
+            foreach (var mail in emails)
+            {
+                var message = new System.Net.Mail.MailMessage();
+                message.To.Add(mail);
+
+                new Services.Mail.WelcomeMail(message, new
+                {
+                    Name = mail,
+                    Url = host
+                });
+
+                
+            }
+
+        }
+
 
         #endregion
 

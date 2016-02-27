@@ -58,6 +58,21 @@ namespace API.Endpoints.Accounts
         }
 
         /// <summary>
+        /// Find Accounts by Email or Name
+        /// </summary>
+        /// <returns></returns>
+        [Swashbuckle.Swagger.Annotations.SwaggerResponseRemoveDefaults]
+        [Swashbuckle.Swagger.Annotations.SwaggerResponse(HttpStatusCode.OK)]
+        [Gale.Security.Oauth.Jwt.Authorize()]
+        [HierarchicalRoute("Find")]
+        public IHttpActionResult Get(String q, int limit = 10, int offset = 0)
+        {
+            return new Services.Find(this.User.PrimarySid(), q, offset, limit);
+        }
+
+
+        #region --> FRIENDS
+        /// <summary>
         /// Retrieve Account's Friends
         /// </summary>
         /// <returns></returns>
@@ -65,7 +80,7 @@ namespace API.Endpoints.Accounts
         [Swashbuckle.Swagger.Annotations.SwaggerResponseRemoveDefaults]
         [Swashbuckle.Swagger.Annotations.SwaggerResponse(HttpStatusCode.OK)]
         [HierarchicalRoute("/Me/Friends")]
-        public IHttpActionResult MyFriends(String q="", int limit = 10, int offset = 0)
+        public IHttpActionResult MyFriends(String q = "", int limit = 10, int offset = 0)
         {
             return new Services.Friends(this.User.PrimarySid(), q, offset, limit);
         }
@@ -79,12 +94,13 @@ namespace API.Endpoints.Accounts
         [Swashbuckle.Swagger.Annotations.SwaggerResponseRemoveDefaults]
         [Swashbuckle.Swagger.Annotations.SwaggerResponse(HttpStatusCode.OK)]
         [HierarchicalRoute("/{id:Guid}/Friends")]
-        public IHttpActionResult Friends(String id, String q="", int limit = 10, int offset = 0)
+        public IHttpActionResult Friends(String id, String q = "", int limit = 10, int offset = 0)
         {
             return new Services.Friends(id, q, offset, limit);
         }
+        #endregion
 
-
+        #region --> FOLLOW
         /// <summary>
         /// Follow Accounts
         /// </summary>
@@ -120,6 +136,8 @@ namespace API.Endpoints.Accounts
 
             return new Services.Unfollow(this.User.PrimarySid(), account);
         }
+
+        #endregion
 
     }
 }

@@ -20,7 +20,9 @@ namespace API.Endpoints.Events.Services
         /// </summary>
         /// <param name="creator"></param>
         /// <param name="newEvent"></param>
-        public Create(String creator , Models.NewEvent newEvent) : base(newEvent) {
+        public Create(String creator, Models.NewEvent newEvent)
+            : base(newEvent)
+        {
             this._creator = creator;
         }
 
@@ -48,23 +50,27 @@ namespace API.Endpoints.Events.Services
                 svc.Parameters.Add("KNOW_Token", this.Model.knowledge);
                 svc.Parameters.Add("PLAC_Token", this.Model.place);
 
-                svc.Parameters.Add("EVNT_Date", this.Model.date);
+                svc.Parameters.Add("EVNT_Date", this.Model.date.ToLocalTime());
                 svc.Parameters.Add("EVNT_Description", this.Model.description);
                 svc.Parameters.Add("EVNT_IsRestricted", this.Model.isRestricted);
                 svc.Parameters.Add("EVNT_ISPrivate", this.Model.isPrivate);
-                
+
                 svc.Parameters.Add("EVNT_Name", this.Model.name);
 
-                if(this.Model.tags.Count> 0) { 
-                svc.Parameters.Add("TAGS", String.Join(",", this.Model.tags));
+                if (this.Model.tags.Count > 0)
+                {
+                    svc.Parameters.Add("TAGS", String.Join(",", this.Model.tags));
                 }
 
-
-                this.ExecuteAction(svc);
+                Guid token = (Guid)this.ExecuteScalar(svc);
 
                 return Task.FromResult(new HttpResponseMessage()
                 {
-                    StatusCode = System.Net.HttpStatusCode.Created
+                    StatusCode = System.Net.HttpStatusCode.Created,
+                    Content = new ObjectContent<Object>(new {
+                        token = token.ToString()
+                    },
+                    new Gale.REST.Http.Formatter.KqlFormatter())
                 });
             }
         }

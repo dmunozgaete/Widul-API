@@ -68,7 +68,10 @@ namespace API.Endpoints.Events.Services.Invitations
             var assembly = this.GetType().Assembly;
 
             mail.IsBodyHtml = true;
-            mail.From = new MailAddress(System.Configuration.ConfigurationManager.AppSettings["Mail:Account"]);
+            mail.From = new MailAddress(
+                System.Configuration.ConfigurationManager.AppSettings["Mail:Account"],
+                Templates.Mail.Invitation_From_DisplayName
+            );
             AlternateView alternateView = AlternateView.CreateAlternateViewFromString(mail.Body, null, MediaTypeNames.Text.Html);
 
             //----------------------------------
@@ -181,11 +184,11 @@ namespace API.Endpoints.Events.Services.Invitations
                             {
                                 Event = eventDetail,
                                 Guest = guest,
-                                Host =  this._host,
+                                Host = this._host,
                                 AccessToken = token.access_token
                             })
                         };
-                        message.To.Add(new MailAddress(guest.email,Templates.Mail.Invitation_From_DisplayName));
+                        message.To.Add(new MailAddress(guest.email));
 
                         //Embed Images , and send
                         PrepareAndSend(message);
@@ -195,7 +198,7 @@ namespace API.Endpoints.Events.Services.Invitations
                     //USERS (Email's)
                     foreach (var email in nonUsers)
                     {
-                     
+
                         //----------------------------------------------------------------------
                         //Invitation Email
                         MailMessage message = new MailMessage()
@@ -212,7 +215,7 @@ namespace API.Endpoints.Events.Services.Invitations
                                     token = System.Guid.Empty
                                 },
                                 Host = this._host,
-                                AccessToken = ""  
+                                AccessToken = ""
                             })
                         };
                         message.To.Add(new MailAddress(email));

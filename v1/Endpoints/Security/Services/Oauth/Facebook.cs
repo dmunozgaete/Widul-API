@@ -32,34 +32,6 @@ namespace API.Endpoints.Security.Services.Oauth
         }
 
         /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
-        private string RenderView(dynamic model)
-        {
-            //----------------------------------
-            var assembly = this.GetType().Assembly;
-            String resourcePath = "API.Endpoints.Security.Templates.Welcome.cshtml";
-
-            using (System.IO.Stream stream = assembly.GetManifestResourceStream(resourcePath))
-            {
-                //------------------------------------------------------------------------------------------------------
-                // GUARD EXCEPTIONS
-                Gale.Exception.RestException.Guard(() => stream == null, "TEMPLATE_DONT_EXIST", API.Errors.ResourceManager);
-                //------------------------------------------------------------------------------------------------------
-
-                using (System.IO.StreamReader reader = new System.IO.StreamReader(stream))
-                {
-                    var view = Template.Compile(reader.ReadToEnd());
-                    return view.Render(model);
-                }
-            }
-            //----------------------------------
-        }
-
-
-        /// <summary>
         /// Async Process
         /// </summary>
         /// <param name="cancellationToken"></param>
@@ -121,20 +93,14 @@ namespace API.Endpoints.Security.Services.Oauth
                     {
                         //----------------------------------------------------------------------
                         //Welcome Email
-                        MailMessage message = new MailMessage()
-                        {
-                            IsBodyHtml = true,
-                            From = new MailAddress(System.Configuration.ConfigurationManager.AppSettings["Mail:Account"]),
-                            Subject = Templates.Mail.Welcome_Subject,
-                            Body = RenderView(new
-                            {
-                                Name = Model.name,
-                                Url = String.Format("{0}#/public/home", this._host)
-                            })
-                        };
+                        MailMessage message = new MailMessage();
                         message.To.Add(new MailAddress(Model.email));
-                        SmtpClient client = new SmtpClient();
-                        client.Send(message);
+                        
+                        new Mail.WelcomeMail(message, new
+                        {
+                            Name = Model.name,
+                            Url = String.Format("{0}#/public/home", this._host)
+                        });
                         //----------------------------------------------------------------------
                     });
                 }

@@ -101,6 +101,7 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Endpoints\Events\Templates\header.png" />
+    <EmbeddedResource Include="Endpoints\Security\Templates\header.png" />
     <Content Include="Global.asax" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -115,6 +116,7 @@
       <DependentUpon>Account.dbml</DependentUpon>
     </Compile>
     <Compile Include="Endpoints\Accounts\Services\Follow.cs" />
+    <Compile Include="Endpoints\Accounts\Services\Find.cs" />
     <Compile Include="Endpoints\Accounts\Services\Friends.cs" />
     <Compile Include="Endpoints\Accounts\Services\Get.cs" />
     <Compile Include="Endpoints\Accounts\Services\Unfollow.cs" />
@@ -214,6 +216,7 @@
       <DependentUpon>Security.resx</DependentUpon>
     </Compile>
     <Compile Include="Endpoints\Security\SecurityController.cs" />
+    <Compile Include="Endpoints\Security\Services\Mail\WelcomeMail.cs" />
     <Compile Include="Endpoints\Security\Services\Oauth\Facebook.cs" />
     <Compile Include="Endpoints\Security\Templates\Mail.Designer.cs">
       <DependentUpon>Mail.resx</DependentUpon>
