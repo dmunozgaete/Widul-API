@@ -185,7 +185,7 @@ namespace API.Endpoints.Events.Services.Invitations
                                 AccessToken = token.access_token
                             })
                         };
-                        message.To.Add(new MailAddress(guest.email));
+                        message.To.Add(new MailAddress(guest.email,Templates.Mail.Invitation_From_DisplayName));
 
                         //Embed Images , and send
                         PrepareAndSend(message);

@@ -172,13 +172,13 @@ namespace API.Endpoints.Events
         }
 
         /// <summary>
-        /// Test Mail (Only for Root Roles)
+        /// Test Invitation Mail (Only for Root Roles)
         /// </summary>
         /// <param name="id"></param>
         /// <param name="emailTo"></param>
         /// <returns></returns>
         [HttpGet]
-        [HierarchicalRoute("/{id:Guid}/Invitations/Test")]
+        [HierarchicalRoute("/{id:Guid}/Mail/Invitations")]
         [Gale.Security.Oauth.Jwt.Authorize(Roles = WebApiConfig.RootRoles)]
         public IHttpActionResult TestInvitation(String id, [FromUri]List<String> guests)
         {
