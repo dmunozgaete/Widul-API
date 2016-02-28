@@ -14,8 +14,9 @@
         <div style="width:30%; float:right; text-align:center;">
             <h4 style="margin:0 0 10px 0; ">¿Asistirás?</h4>
 
-            <a href="@(Model.Host)/#/public/events/mail/approve/@(Model.Event.token)/@(Model.AccessToken)" style="width:50%; padding:15px 0; color:white; background:#FF1966; display:block; float:left; text-decoration:none">Si</a>
-            <a href="@(Model.Host)/#/public/events/mail/reject/@(Model.Event.token)/@(Model.AccessToken)" style="width:50%; padding:15px 0; color:white; background:#959595; display:block;  float:left;text-decoration:none">No</a>
+            <a href="@(Model.apiUrl)/Approve?access_token=@(Model.AccessToken)" style="width:50%; padding:15px 0; color:white; background:#FF1966; display:block; float:left; text-decoration:none">Si</a>
+            <a href="@(Model.apiUrl)/Reject?access_token=@(Model.AccessToken)" style="width:50%; padding:15px 0; color:white; background:#959595; display:block;  float:left;text-decoration:none">No</a>
+            
         </div>
 
     </div>

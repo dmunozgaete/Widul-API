@@ -18,6 +18,7 @@ namespace API.Endpoints.Events.Services.Invitations
         private String _creator;
         private String _host;
         private String _event;
+        private String _apiUrl;
 
         /// <summary>
         /// 
@@ -26,12 +27,13 @@ namespace API.Endpoints.Events.Services.Invitations
         /// <param name="creator"></param>
         /// <param name="guests"></param>
         /// <param name="host"></param>
-        public Create(String eventTarget, String creator, List<string> guests, string host)
+        public Create(String eventTarget, String creator, List<string> guests, string host, string apiUrl)
             : base(guests)
         {
             this._creator = creator;
             this._event = eventTarget;
             this._host = host;
+            this._apiUrl = apiUrl;
         }
 
         /// <summary>
@@ -172,6 +174,7 @@ namespace API.Endpoints.Events.Services.Invitations
                         claims.Add(new System.Security.Claims.Claim(System.Security.Claims.ClaimTypes.PrimarySid, guest.token.ToString()));
                         claims.Add(new System.Security.Claims.Claim(System.Security.Claims.ClaimTypes.Name, guest.fullname));
                         claims.Add(new System.Security.Claims.Claim("photo", guest.photo.ToString()));
+                        claims.Add(new System.Security.Claims.Claim("host", this._host));
                         var token = Gale.Security.Oauth.Jwt.Manager.CreateToken(claims, eventDetail.date);  //To Execution date for the event		
 
 
@@ -185,6 +188,7 @@ namespace API.Endpoints.Events.Services.Invitations
                                 Event = eventDetail,
                                 Guest = guest,
                                 Host = this._host,
+                                apiUrl = this._apiUrl,
                                 AccessToken = token.access_token
                             })
                         };

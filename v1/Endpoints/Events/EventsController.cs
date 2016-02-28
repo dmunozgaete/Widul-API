@@ -168,7 +168,8 @@ namespace API.Endpoints.Events
         {
             var me = this.User.PrimarySid().ToString();
             string host = this.Request.Headers.Referrer.ToString();
-            return new Services.Invitations.Create(id, me, guests, host);
+            string apiUrl = System.Web.HttpContext.Current.Request.Url.AbsoluteUri;
+            return new Services.Invitations.Create(id, me, guests, host, apiUrl);
         }
 
         /// <summary>
@@ -182,10 +183,29 @@ namespace API.Endpoints.Events
         [Gale.Security.Oauth.Jwt.Authorize(Roles = WebApiConfig.RootRoles)]
         public IHttpActionResult TestInvitation(String id, [FromUri]List<String> guests)
         {
-            var me = this.User.PrimarySid().ToString();
-            string host = this.Request.Headers.Referrer.ToString();
-            return new Services.Invitations.Create(id, me, guests, host);
+            return CreateInvitations(id, guests);  
         }
+
+
+        [HttpGet]
+        [HierarchicalRoute("/{id:Guid}/Invitations/Approve")]
+        [Gale.Security.Oauth.Jwt.Authorize]
+        public IHttpActionResult Approve(String id,[FromUri] String access_token)
+        {
+            var host = this.User.Claim("host");
+            return new Services.Invitations.Approve(id, this.User.PrimarySid().ToString(), host);
+        }
+
+        [HttpGet]
+        [HierarchicalRoute("/{id:Guid}/Invitations/Reject")]
+        [Gale.Security.Oauth.Jwt.Authorize]
+        public IHttpActionResult Reject(String id,[FromUri] String access_token)
+        {
+            var host = this.User.Claim("host");
+            return new Services.Invitations.Reject(id, this.User.PrimarySid().ToString(), host);
+        }
+        
+
         #endregion
     }
 }
