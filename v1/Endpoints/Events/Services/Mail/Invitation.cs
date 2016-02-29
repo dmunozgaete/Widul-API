@@ -41,8 +41,9 @@ namespace API.Endpoints.Events.Services.Mail
             // HEADER IMAGE
             String resourcePath = "API.Endpoints.Events.Templates.header.png";
             System.IO.Stream stream = assembly.GetManifestResourceStream(resourcePath);
-            LinkedResource header = new LinkedResource(stream);
+            LinkedResource header = new LinkedResource(stream , "image/png");
             header.ContentId = "header";
+            
             alternateView.LinkedResources.Add(header);
             //----------------------------------
 
