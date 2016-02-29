@@ -12,19 +12,25 @@ namespace API.Endpoints.Events.Services.Invitations
     /// <summary>
     /// Join to an Event
     /// </summary>
-    public class Approve :Gale.REST.Http.HttpCreateActionResult<String>
+    public class Approve : Gale.REST.Http.HttpCreateActionResult<String>
     {
         String _user;
         String _host;
+        String _name;
 
         /// <summary>
-        /// Constructor
+        /// 
         /// </summary>
         /// <param name="eventToken"></param>
         /// <param name="user"></param>
-        public Approve(String eventToken,String user,String host):base(eventToken) {
+        /// <param name="host"></param>
+        /// <param name="name"></param>
+        public Approve(String eventToken, String user, String host, String name)
+            : base(eventToken)
+        {
             _user = user;
             _host = host;
+            _name = name;
         }
 
         private string RenderView(dynamic model)
@@ -62,34 +68,36 @@ namespace API.Endpoints.Events.Services.Invitations
             Gale.Exception.RestException.Guard(() => this.Model == null, "EMPTY_EVENT", API.Errors.ResourceManager);
             Gale.Exception.RestException.Guard(() => String.IsNullOrEmpty(_user), "EMPTY_USER", API.Errors.ResourceManager);
 
-            using (var svc = new Gale.Db.DataService("SP_INS_JoinEvent"))
+            //Only create invitation via email if the user is a widul user =)!
+            if (this._name.IndexOf("@") <= 0)
             {
-                svc.Parameters.Add("USER_Token", _user);
-                svc.Parameters.Add("EVNT_Token", this.Model);
-
-                this.ExecuteAction(svc);
-
-                String html = RenderView(new
+                using (var svc = new Gale.Db.DataService("SP_INS_JoinEvent"))
                 {
+                    svc.Parameters.Add("USER_Token", _user);
+                    svc.Parameters.Add("EVNT_Token", this.Model);
 
-                    host = this._host,
-                    target_event = this.Model 
-
-      
-                });
-
-                var response = new HttpResponseMessage()
-                {
-                    StatusCode = System.Net.HttpStatusCode.OK,
-                    Content = new System.Net.Http.StringContent(html)
-
-                };
-
-                response.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("text/html");
-
-                return Task.FromResult(response);
+                    this.ExecuteAction(svc);
+                }
             }
 
+            //Send an Approved or register view =)!
+            String html = RenderView(new
+            {
+                AppUrl = this._host,
+                EventToken = this.Model,
+                Guest = this._name
+            });
+
+            var response = new HttpResponseMessage()
+            {
+                StatusCode = System.Net.HttpStatusCode.OK,
+                Content = new System.Net.Http.StringContent(html)
+
+            };
+
+            response.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("text/html");
+
+            return Task.FromResult(response);
 
         }
     }

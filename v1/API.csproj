@@ -157,6 +157,7 @@
     <Compile Include="Endpoints\Events\Services\Create.cs" />
     <Compile Include="Endpoints\Events\Services\Invitations\Reject.cs" />
     <Compile Include="Endpoints\Events\Services\Invitations\Approve.cs" />
+    <Compile Include="Endpoints\Events\Services\Mail\Invitation.cs" />
     <Compile Include="Endpoints\Events\Services\Personal.cs" />
     <Compile Include="Endpoints\Events\Services\Get.cs" />
     <Compile Include="Endpoints\Events\Services\Invitations\Create.cs" />
@@ -218,7 +219,7 @@
       <DependentUpon>Security.resx</DependentUpon>
     </Compile>
     <Compile Include="Endpoints\Security\SecurityController.cs" />
-    <Compile Include="Endpoints\Security\Services\Mail\WelcomeMail.cs" />
+    <Compile Include="Endpoints\Security\Services\Mail\Welcome.cs" />
     <Compile Include="Endpoints\Security\Services\Oauth\Facebook.cs" />
     <Compile Include="Endpoints\Security\Templates\Mail.Designer.cs">
       <DependentUpon>Mail.resx</DependentUpon>

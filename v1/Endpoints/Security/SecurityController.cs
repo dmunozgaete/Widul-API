@@ -57,7 +57,7 @@ namespace API.Endpoints.Security
                 var message = new System.Net.Mail.MailMessage();
                 message.To.Add(mail);
 
-                new Services.Mail.WelcomeMail(message, new
+                new Services.Mail.Welcome(message, new
                 {
                     Name = mail,
                     Url = host

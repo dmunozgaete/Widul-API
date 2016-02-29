@@ -39,64 +39,6 @@ namespace API.Endpoints.Events.Services.Invitations
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
-        private string RenderView(dynamic model)
-        {
-            //----------------------------------
-            var assembly = this.GetType().Assembly;
-            String resourcePath = "API.Endpoints.Events.Templates.Invitation.cshtml";
-
-            using (System.IO.Stream stream = assembly.GetManifestResourceStream(resourcePath))
-            {
-                //------------------------------------------------------------------------------------------------------
-                // GUARD EXCEPTIONS
-                Gale.Exception.RestException.Guard(() => stream == null, "TEMPLATE_DONT_EXIST", API.Errors.ResourceManager);
-                //------------------------------------------------------------------------------------------------------
-
-                using (System.IO.StreamReader reader = new System.IO.StreamReader(stream))
-                {
-                    var view = Template.Compile(reader.ReadToEnd());
-                    return view.Render(model);
-                }
-            }
-            //----------------------------------
-        }
-
-
-        private void PrepareAndSend(MailMessage mail)
-        {
-
-            var assembly = this.GetType().Assembly;
-
-            mail.IsBodyHtml = true;
-            mail.From = new MailAddress(
-                System.Configuration.ConfigurationManager.AppSettings["Mail:Account"],
-                Templates.Mail.Invitation_From_DisplayName
-            );
-            AlternateView alternateView = AlternateView.CreateAlternateViewFromString(mail.Body, null, MediaTypeNames.Text.Html);
-
-            //----------------------------------
-            // HEADER IMAGE
-            String resourcePath = "API.Endpoints.Events.Templates.header.png";
-            System.IO.Stream stream = assembly.GetManifestResourceStream(resourcePath);
-            LinkedResource header = new LinkedResource(stream);
-            header.ContentId = "header";
-            alternateView.LinkedResources.Add(header);
-            //----------------------------------
-
-            mail.AlternateViews.Add(alternateView);
-
-            SmtpClient client = new SmtpClient();
-            client.Send(mail);
-
-            //Dispose Stream's
-            stream.Dispose();
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         public override System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> ExecuteAsync(System.Threading.CancellationToken cancellationToken)
@@ -148,13 +90,11 @@ namespace API.Endpoints.Events.Services.Invitations
                 Gale.Exception.RestException.Guard(() => eventDetail == null, "EVENT_DONT_EXISTS", API.Errors.ResourceManager);
                 //----------------------------------------------------------------------------------------------------
 
-
                 //Setting Values ;)!
                 eventDetail.comments_latest = repo.GetModel<Models.VW_EventComment>(2);
                 eventDetail.tags = repo.GetModel<Models.EventTag>(3);
                 eventDetail.place = repo.GetModel<Models.Place>(4).FirstOrDefault();
                 eventDetail.participants_tops = repo.GetModel<Models.TopParticipant>(5);
-
 
                 //TODO: Send Mail in Async (Fire && Forget)
                 //http://stackoverflow.com/questions/22864367/fire-and-forget-approach
@@ -176,56 +116,66 @@ namespace API.Endpoints.Events.Services.Invitations
                         claims.Add(new System.Security.Claims.Claim("photo", guest.photo.ToString()));
                         claims.Add(new System.Security.Claims.Claim("host", this._host));
                         var token = Gale.Security.Oauth.Jwt.Manager.CreateToken(claims, eventDetail.date);  //To Execution date for the event		
-
+                        //----------------------------------------------------------------------
 
                         //----------------------------------------------------------------------
                         //Invitation Email
                         var message = new MailMessage()
                         {
                             Subject = String.Format(Templates.Mail.Invitation_Subject, eventDetail.creator_name),
-                            Body = RenderView(new
-                            {
-                                Event = eventDetail,
-                                Guest = guest,
-                                Host = this._host,
-                                apiUrl = this._apiUrl,
-                                AccessToken = token.access_token
-                            })
                         };
                         message.To.Add(new MailAddress(guest.email));
 
                         //Embed Images , and send
-                        PrepareAndSend(message);
+                        new Mail.Invitation(message, new
+                        {
+                            Event = eventDetail,
+                            Guest = guest,
+                            Host = this._host,
+                            apiUrl = this._apiUrl,
+                            AccessToken = token.access_token
+                        });
                         //----------------------------------------------------------------------
                     }
 
                     //USERS (Email's)
                     foreach (var email in nonUsers)
                     {
+                        //----------------------------------------------------------------------
+                        //(USABILITY - NON WIDUL USER)
+                        //Create a Temporary Token for non-widul user, (need to register)
+                        List<System.Security.Claims.Claim> claims = new List<System.Security.Claims.Claim>();
+
+                        claims.Add(new System.Security.Claims.Claim(System.Security.Claims.ClaimTypes.Email, email));
+                        claims.Add(new System.Security.Claims.Claim(System.Security.Claims.ClaimTypes.PrimarySid, email));
+                        claims.Add(new System.Security.Claims.Claim(System.Security.Claims.ClaimTypes.Name, email));
+                        claims.Add(new System.Security.Claims.Claim("host", this._host));
+                        var token = Gale.Security.Oauth.Jwt.Manager.CreateToken(claims, eventDetail.date);  //To Execution date for the event		
+                        //----------------------------------------------------------------------
 
                         //----------------------------------------------------------------------
                         //Invitation Email
                         MailMessage message = new MailMessage()
                         {
                             Subject = String.Format(Templates.Mail.Invitation_Subject, eventDetail.creator_name),
-                            Body = RenderView(new
-                            {
-                                Event = eventDetail,
-                                Guest = new Models.Guest()
-                                {
-                                    email = email,
-                                    fullname = email,
-                                    photo = null,
-                                    token = System.Guid.Empty
-                                },
-                                Host = this._host,
-                                AccessToken = ""
-                            })
                         };
                         message.To.Add(new MailAddress(email));
 
                         //Embed Images , and send
-                        PrepareAndSend(message);
+                        new Mail.Invitation(message, new
+                        {
+                            Event = eventDetail,
+                            Guest =  new Models.Guest()
+                            {
+                                email = email,
+                                fullname = email,
+                                photo = null,
+                                token = System.Guid.Empty
+                            },
+                            Host = this._host,
+                            apiUrl = this._apiUrl,
+                            AccessToken = token.access_token
+                        });
                         //----------------------------------------------------------------------
                     }
                 });

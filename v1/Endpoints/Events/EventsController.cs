@@ -183,28 +183,42 @@ namespace API.Endpoints.Events
         [Gale.Security.Oauth.Jwt.Authorize(Roles = WebApiConfig.RootRoles)]
         public IHttpActionResult TestInvitation(String id, [FromUri]List<String> guests)
         {
-            return CreateInvitations(id, guests);  
+            return CreateInvitations(id, guests);
         }
 
 
+        /// <summary>
+        /// Approve invitation via mail (Only if a widul user, otherwise, show a Register Event Action)
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="access_token"></param>
+        /// <returns></returns>
         [HttpGet]
         [HierarchicalRoute("/{id:Guid}/Invitations/Approve")]
         [Gale.Security.Oauth.Jwt.Authorize]
-        public IHttpActionResult Approve(String id,[FromUri] String access_token)
+        public IHttpActionResult Approve(String id, [FromUri] String access_token = "")
         {
-            var host = this.User.Claim("host");
-            return new Services.Invitations.Approve(id, this.User.PrimarySid().ToString(), host);
+            var host = this.User.Claim("host"); //Custom Claim
+            var unique_name = this.User.Claim(System.Security.Claims.ClaimTypes.Name);
+            return new Services.Invitations.Approve(id, this.User.PrimarySid().ToString(), host, unique_name);
         }
 
+        /// <summary>
+        /// Reject Invitation via Email
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="access_token"></param>
+        /// <returns></returns>
         [HttpGet]
         [HierarchicalRoute("/{id:Guid}/Invitations/Reject")]
         [Gale.Security.Oauth.Jwt.Authorize]
-        public IHttpActionResult Reject(String id,[FromUri] String access_token)
+        public IHttpActionResult Reject(String id, [FromUri] String access_token = "")
         {
-            var host = this.User.Claim("host");
-            return new Services.Invitations.Reject(id, this.User.PrimarySid().ToString(), host);
+            var host = this.User.Claim("host"); //Custom Claim
+            var unique_name = this.User.Claim(System.Security.Claims.ClaimTypes.Name);
+            return new Services.Invitations.Reject(id, this.User.PrimarySid().ToString(), host, unique_name);
         }
-        
+
 
         #endregion
     }

@@ -6,12 +6,12 @@ using System.Net.Mime;
 using System.Web;
 using RazorTemplates.Core;
 
-namespace API.Endpoints.Security.Services.Mail
+namespace API.Endpoints.Events.Services.Mail
 {
     /// <summary>
     /// Send a Welcome Email
     /// </summary>
-    public class WelcomeMail
+    public class Invitation
     {
 
         /// <summary>
@@ -19,7 +19,7 @@ namespace API.Endpoints.Security.Services.Mail
         /// </summary>
         /// <param name="mail"></param>
         /// <param name="model"></param>
-        public WelcomeMail(MailMessage mail, dynamic model)
+        public Invitation(MailMessage mail, dynamic model)
         {
             mail.Body = RenderView(model);
             PrepareAndSend(mail);
@@ -31,16 +31,15 @@ namespace API.Endpoints.Security.Services.Mail
             var assembly = this.GetType().Assembly;
 
             mail.IsBodyHtml = true;
-            mail.Subject = Templates.Mail.Welcome_Subject;
             mail.From = new MailAddress(
                 System.Configuration.ConfigurationManager.AppSettings["Mail:Account"],
-                Templates.Mail.Welcome_From_DisplayName
+                Templates.Mail.Invitation_From_DisplayName
             );
             AlternateView alternateView = AlternateView.CreateAlternateViewFromString(mail.Body, null, MediaTypeNames.Text.Html);
 
             //----------------------------------
             // HEADER IMAGE
-            String resourcePath = "API.Endpoints.Security.Templates.header.png";
+            String resourcePath = "API.Endpoints.Events.Templates.header.png";
             System.IO.Stream stream = assembly.GetManifestResourceStream(resourcePath);
             LinkedResource header = new LinkedResource(stream);
             header.ContentId = "header";
@@ -66,7 +65,7 @@ namespace API.Endpoints.Security.Services.Mail
         {
             //----------------------------------
             var assembly = this.GetType().Assembly;
-            String resourcePath = "API.Endpoints.Security.Templates.Welcome.cshtml";
+            String resourcePath = "API.Endpoints.Events.Templates.Invitation.cshtml";
 
             using (System.IO.Stream stream = assembly.GetManifestResourceStream(resourcePath))
             {

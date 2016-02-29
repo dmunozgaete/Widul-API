@@ -96,7 +96,7 @@ namespace API.Endpoints.Security.Services.Oauth
                         MailMessage message = new MailMessage();
                         message.To.Add(new MailAddress(Model.email));
                         
-                        new Mail.WelcomeMail(message, new
+                        new Mail.Welcome(message, new
                         {
                             Name = Model.name,
                             Url = String.Format("{0}#/public/home", this._host)
