@@ -221,5 +221,22 @@ namespace API.Endpoints.Events
 
 
         #endregion
+
+        #region --> REDIR
+
+        /// <summary>
+        /// Generate a blank page with the Facebook OG Metatags and then Redirect to the selected Event.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [HierarchicalRoute("/Redir/{id:Guid}")]
+        public IHttpActionResult Redir(String id)
+        {
+            string host = HttpContext.Current.Request.Url.Host;
+            return new Services.Redir(id,host);
+        }
+
+        #endregion
     }
 }
