@@ -31,7 +31,7 @@ namespace API.Endpoints.Security
             //GUARD EXCEPTION
             Gale.Exception.RestException.Guard(() => credentials == null, "EMPTY_BODY", API.Errors.ResourceManager);
             Gale.Exception.RestException.Guard(() => credentials.accessToken == null, "EMPTY_ACCESSTOKEN", API.Errors.ResourceManager);
-            Gale.Exception.RestException.Guard(() => credentials.email == null, "EMPTY_EMAIL", API.Errors.ResourceManager);
+            //Gale.Exception.RestException.Guard(() => credentials.email == null, "EMPTY_EMAIL", API.Errors.ResourceManager);
             //------------------------------------------------------------------------------------------------------------------------
 
             string host = this.Request.Headers.Referrer.ToString();

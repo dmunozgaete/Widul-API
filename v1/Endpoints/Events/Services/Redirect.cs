@@ -12,12 +12,13 @@ namespace API.Endpoints.Events.Services
     /// <summary>
     /// Generate a blank page with the Facebook OG Metatags and then Redirect to the selected Event.
     /// </summary>
-    public class Redir : Gale.REST.Http.HttpCreateActionResult<String>
+    public class Redirect : Gale.REST.Http.HttpCreateActionResult<String>
     {
 
         String _host;
 
-        public Redir(String eventToken, String host) : base(eventToken)
+        public Redirect(String eventToken, String host)
+            : base(eventToken)
         {
             _host = host;
         }

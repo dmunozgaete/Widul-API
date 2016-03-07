@@ -152,7 +152,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Tags.dbml</DependentUpon>
     </Compile>
-    <Compile Include="Endpoints\Events\Services\Redir.cs" />
+    <Compile Include="Endpoints\Events\Services\Participants.cs" />
+    <Compile Include="Endpoints\Events\Services\Redirect.cs" />
     <Compile Include="Endpoints\Events\Services\Comments\Create.cs" />
     <Compile Include="Endpoints\Events\Services\Comments\Get.cs" />
     <Compile Include="Endpoints\Events\Services\Create.cs" />

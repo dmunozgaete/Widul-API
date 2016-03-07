@@ -58,6 +58,12 @@ namespace API.Endpoints.Security.Services.Oauth
                 }
             }
 
+            if (String.IsNullOrEmpty(Model.email))
+            {
+                //Set a random email
+                Model.email = (DateTime.Now.Millisecond) + "@no-mail.com";
+            }
+
             using (Gale.Db.DataService svc = new Gale.Db.DataService("SP_COR_GET_AutenticateUser"))
             {
                 svc.Parameters.Add("USER_FullName", Model.name);

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Http;
 
@@ -222,7 +223,25 @@ namespace API.Endpoints.Events
 
         #endregion
 
-        #region --> REDIR
+        #region --> PARTICIPANTS
+      
+        /// <summary>
+        /// Retrieve Event participants
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [Swashbuckle.Swagger.Annotations.SwaggerResponseRemoveDefaults]
+        [Swashbuckle.Swagger.Annotations.SwaggerResponse(HttpStatusCode.OK)]
+        [HierarchicalRoute("/{id:Guid}/Participants")]
+        [Gale.Security.Oauth.Jwt.Authorize]
+        public IHttpActionResult Participants(String id, int limit = 10, int offset = 0)
+        {
+            String user = this.User.PrimarySid();
+            return new Services.Participants(user, id, offset, limit);
+        }
+        #endregion
+
+        #region --> REDIRECT
 
         /// <summary>
         /// Generate a blank page with the Facebook OG Metatags and then Redirect to the selected Event.
@@ -231,10 +250,10 @@ namespace API.Endpoints.Events
         /// <returns></returns>
         [HttpGet]
         [HierarchicalRoute("/Redir/{id:Guid}")]
-        public IHttpActionResult Redir(String id)
+        public IHttpActionResult Redirect(String id)
         {
             string host = HttpContext.Current.Request.Url.Host;
-            return new Services.Redir(id,host);
+            return new Services.Redirect(id, host);
         }
 
         #endregion

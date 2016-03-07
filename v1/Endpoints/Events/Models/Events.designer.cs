@@ -36,6 +36,9 @@ namespace API.Endpoints.Events.Models
     partial void InsertTopParticipant(TopParticipant instance);
     partial void UpdateTopParticipant(TopParticipant instance);
     partial void DeleteTopParticipant(TopParticipant instance);
+    partial void InsertParticipant(Participant instance);
+    partial void UpdateParticipant(Participant instance);
+    partial void DeleteParticipant(Participant instance);
     #endregion
 		
 		public EventsDataContext() : 
@@ -145,6 +148,14 @@ namespace API.Endpoints.Events.Models
 			get
 			{
 				return this.GetTable<EventPersonal>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Participant> Participants
+		{
+			get
+			{
+				return this.GetTable<Participant>();
 			}
 		}
 	}
@@ -1523,6 +1534,164 @@ namespace API.Endpoints.Events.Models
 				{
 					this._joined = value;
 				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TB_COR_User")]
+	public partial class Participant : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private System.Guid _token;
+		
+		private string _email;
+		
+		private string _name;
+		
+		private System.Nullable<System.Guid> _photo;
+		
+		private bool _isInvitation;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OntokenChanging(System.Guid value);
+    partial void OntokenChanged();
+    partial void OnemailChanging(string value);
+    partial void OnemailChanged();
+    partial void OnfullnameChanging(string value);
+    partial void OnfullnameChanged();
+    partial void OnphotoChanging(System.Nullable<System.Guid> value);
+    partial void OnphotoChanged();
+    partial void OnisInvitationChanging(bool value);
+    partial void OnisInvitationChanged();
+    #endregion
+		
+		public Participant()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="ENTI_Token", Storage="_token", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
+		public System.Guid token
+		{
+			get
+			{
+				return this._token;
+			}
+			set
+			{
+				if ((this._token != value))
+				{
+					this.OntokenChanging(value);
+					this.SendPropertyChanging();
+					this._token = value;
+					this.SendPropertyChanged("token");
+					this.OntokenChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="USER_Email", Storage="_email", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
+		public string email
+		{
+			get
+			{
+				return this._email;
+			}
+			set
+			{
+				if ((this._email != value))
+				{
+					this.OnemailChanging(value);
+					this.SendPropertyChanging();
+					this._email = value;
+					this.SendPropertyChanged("email");
+					this.OnemailChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="USER_FullName", Storage="_name", DbType="VarChar(250) NOT NULL", CanBeNull=false)]
+		public string fullname
+		{
+			get
+			{
+				return this._name;
+			}
+			set
+			{
+				if ((this._name != value))
+				{
+					this.OnfullnameChanging(value);
+					this.SendPropertyChanging();
+					this._name = value;
+					this.SendPropertyChanged("fullname");
+					this.OnfullnameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="USER_Photo", Storage="_photo", DbType="UniqueIdentifier NOT NULL")]
+		public System.Nullable<System.Guid> photo
+		{
+			get
+			{
+				return this._photo;
+			}
+			set
+			{
+				if ((this._photo != value))
+				{
+					this.OnphotoChanging(value);
+					this.SendPropertyChanging();
+					this._photo = value;
+					this.SendPropertyChanged("photo");
+					this.OnphotoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="IsInvitation", Storage="_isInvitation")]
+		public bool isInvitation
+		{
+			get
+			{
+				return this._isInvitation;
+			}
+			set
+			{
+				if ((this._isInvitation != value))
+				{
+					this.OnisInvitationChanging(value);
+					this.SendPropertyChanging();
+					this._isInvitation = value;
+					this.SendPropertyChanged("isInvitation");
+					this.OnisInvitationChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
 	}
