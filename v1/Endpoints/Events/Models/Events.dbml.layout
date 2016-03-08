@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 12.125" name="Events">
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 12.75, 12.125" name="Events">
   <DataContextMoniker Name="/EventsDataContext" />
   <nestedChildShapes>
     <classShape Id="032e8d1a-2a0f-4c80-80a8-7467be8d335e" absoluteBounds="2.875, 0.5, 2, 2.3478011067708326">
@@ -66,6 +66,12 @@
       <DataClassMoniker Name="/EventsDataContext/Participant" />
       <nestedChildShapes>
         <elementListCompartment Id="f3240840-23d4-459a-845e-ccd6c03a781f" absoluteBounds="8.14, 2.585, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="1d496a80-2057-4429-9b61-c8e603d4d84b" absoluteBounds="10.5, 0.5, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/EventsDataContext/EventCreator" />
+      <nestedChildShapes>
+        <elementListCompartment Id="ec7657b0-e1e0-415f-9039-b6b7b143273c" absoluteBounds="10.515, 0.96, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
   </nestedChildShapes>

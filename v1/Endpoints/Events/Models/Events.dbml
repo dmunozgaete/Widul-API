@@ -115,4 +115,12 @@
       <Column Name="IsInvitation" Member="isInvitation" Type="System.Boolean" CanBeNull="false" />
     </Type>
   </Table>
+  <Table Name="dbo.TB_COR_User" Member="EventCreators">
+    <Type Name="EventCreator">
+      <Column Name="ENTI_Token" Member="token" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="USER_Email" Member="email" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="USER_FullName" Member="fullname" Storage="_name" Type="System.String" DbType="VarChar(250) NOT NULL" CanBeNull="false" />
+      <Column Name="USER_Photo" Member="photo" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="true" />
+    </Type>
+  </Table>
 </Database>

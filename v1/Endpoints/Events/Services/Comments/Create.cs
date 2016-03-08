@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Mail;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
@@ -16,6 +17,7 @@ namespace API.Endpoints.Events.Services.Comments
 
         String _user;
         String _evenToken;
+        String _host;
 
         /// <summary>
         /// Constructor
@@ -23,10 +25,11 @@ namespace API.Endpoints.Events.Services.Comments
         /// <param name="eventToken">Event token</param>
         /// <param name="user">User Token</param>
         /// <param name="comment">Comment</param>
-        public Create(String eventToken, String user, Models.NewComment comment) : base(comment) {
+        public Create(String eventToken, String user,String host, Models.NewComment comment) : base(comment) {
 
             _user = user;
             _evenToken = eventToken;
+            _host= host;
 
         }
 
@@ -52,7 +55,32 @@ namespace API.Endpoints.Events.Services.Comments
                 svc.Parameters.Add("COMM_Comment", this.Model.comment);
 
                 var repo = this.ExecuteQuery(svc);
-                var newlyComment = repo.GetModel<Models.VW_EventComment>().FirstOrDefault();
+                var creator = repo.GetModel<Models.EventCreator>().FirstOrDefault();
+                var newlyComment = repo.GetModel<Models.VW_EventComment>(1).FirstOrDefault();
+
+                //TODO: Send Mail in Async (Fire && Forget)
+                Task.Factory.StartNew(() =>
+                {
+
+                    //----------------------------------------------------------------------
+                    //Invitation Email
+                    MailMessage message = new MailMessage()
+                    {
+                        Subject = String.Format(Templates.Mail.CreateNewCommnet_Subject, newlyComment.creator_name),
+                    };
+                    message.To.Add(new MailAddress(creator.email));
+
+                    //Embed Images , and send
+                    new Mail.NewComment(message, new
+                    {
+                        Creator = creator,
+                        Comment = newlyComment,
+                        Host = this._host
+                    });
+                    //----------------------------------------------------------------------
+                    
+                });
+
 
                 return Task.FromResult(new HttpResponseMessage()
                 {

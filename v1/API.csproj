@@ -152,6 +152,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Tags.dbml</DependentUpon>
     </Compile>
+    <Compile Include="Endpoints\Events\Services\Mail\NewComment.cs" />
     <Compile Include="Endpoints\Events\Services\Participants.cs" />
     <Compile Include="Endpoints\Events\Services\Redirect.cs" />
     <Compile Include="Endpoints\Events\Services\Comments\Create.cs" />
@@ -309,6 +310,7 @@
     <EmbeddedResource Include="Endpoints\Events\Templates\Approve.cshtml" />
     <EmbeddedResource Include="Endpoints\Events\Templates\Reject.cshtml" />
     <EmbeddedResource Include="Endpoints\Events\Templates\Redir.cshtml" />
+    <EmbeddedResource Include="Endpoints\Events\Templates\NewComment.cshtml" />
     <None Include="Properties\PublishProfiles\QAS.pubxml" />
     <None Include="Properties\PublishProfiles\QAS_Valentys.pubxml" />
     <None Include="Web.Debug.config">

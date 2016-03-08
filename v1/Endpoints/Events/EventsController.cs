@@ -105,7 +105,8 @@ namespace API.Endpoints.Events
         [Gale.Security.Oauth.Jwt.Authorize]
         public IHttpActionResult CreateComment(String id, Models.NewComment comment)
         {
-            return new Services.Comments.Create(id, this.User.PrimarySid().ToString(), comment);
+            string host = this.Request.Headers.Referrer.ToString();
+            return new Services.Comments.Create(id, this.User.PrimarySid().ToString(), host, comment);
         }
 
         #endregion
