@@ -16,6 +16,7 @@ namespace API.Endpoints.Events.Services.Invitations
     public class Create : Gale.REST.Http.HttpCreateActionResult<List<String>>
     {
         private String _creator;
+        private String _creator_name;
         private String _host;
         private String _event;
         private String _apiUrl;
@@ -27,10 +28,11 @@ namespace API.Endpoints.Events.Services.Invitations
         /// <param name="creator"></param>
         /// <param name="guests"></param>
         /// <param name="host"></param>
-        public Create(String eventTarget, String creator, List<string> guests, string host, string apiUrl)
+        public Create(String eventTarget, String creator, String creator_name, List<string> guests, string host, string apiUrl)
             : base(guests)
         {
             this._creator = creator;
+            this._creator_name = creator_name;
             this._event = eventTarget;
             this._host = host;
             this._apiUrl = apiUrl;
@@ -122,7 +124,7 @@ namespace API.Endpoints.Events.Services.Invitations
                         //Invitation Email
                         var message = new MailMessage()
                         {
-                            Subject = String.Format(Templates.Mail.Invitation_Subject, eventDetail.creator_name),
+                            Subject = String.Format(Templates.Mail.Invitation_Subject, _creator_name),
                         };
                         message.To.Add(new MailAddress(guest.email));
 
@@ -157,7 +159,7 @@ namespace API.Endpoints.Events.Services.Invitations
                         //Invitation Email
                         MailMessage message = new MailMessage()
                         {
-                            Subject = String.Format(Templates.Mail.Invitation_Subject, eventDetail.creator_name),
+                            Subject = String.Format(Templates.Mail.Invitation_Subject, _creator_name),
                         };
                         message.To.Add(new MailAddress(email));
 
@@ -165,7 +167,7 @@ namespace API.Endpoints.Events.Services.Invitations
                         new Mail.Invitation(message, new
                         {
                             Event = eventDetail,
-                            Guest =  new Models.Guest()
+                            Guest = new Models.Guest()
                             {
                                 email = email,
                                 fullname = email,

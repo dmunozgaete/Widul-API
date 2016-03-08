@@ -168,9 +168,11 @@ namespace API.Endpoints.Events
         public IHttpActionResult CreateInvitations(String id, List<String> guests)
         {
             var me = this.User.PrimarySid().ToString();
+            var me_name = this.User.Claim(System.Security.Claims.ClaimTypes.Name);
+
             string host = this.Request.Headers.Referrer.ToString();
             string apiUrl = System.Web.HttpContext.Current.Request.Url.AbsoluteUri;
-            return new Services.Invitations.Create(id, me, guests, host, apiUrl);
+            return new Services.Invitations.Create(id, me, me_name, guests, host, apiUrl);
         }
 
         /// <summary>
@@ -224,7 +226,7 @@ namespace API.Endpoints.Events
         #endregion
 
         #region --> PARTICIPANTS
-      
+
         /// <summary>
         /// Retrieve Event participants
         /// </summary>
