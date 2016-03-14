@@ -102,6 +102,10 @@
   <ItemGroup>
     <EmbeddedResource Include="Endpoints\Events\Templates\header.png" />
     <EmbeddedResource Include="Endpoints\Security\Templates\header.png" />
+    <EmbeddedResource Include="Endpoints\Events\Templates\header.jpg" />
+    <EmbeddedResource Include="Endpoints\Events\Templates\comment.png" />
+    <EmbeddedResource Include="Endpoints\Events\Templates\event.png" />
+    <EmbeddedResource Include="Endpoints\Events\Templates\person.png" />
     <Content Include="Global.asax" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -152,7 +156,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Tags.dbml</DependentUpon>
     </Compile>
+    <Compile Include="Endpoints\Events\Services\Mail\EventAdvice.cs" />
+    <Compile Include="Endpoints\Events\Services\Mail\NewParticipant.cs" />
     <Compile Include="Endpoints\Events\Services\Mail\NewComment.cs" />
+    <Compile Include="Endpoints\Events\Services\Notifications\EventAdvice.cs" />
     <Compile Include="Endpoints\Events\Services\Participants.cs" />
     <Compile Include="Endpoints\Events\Services\Redirect.cs" />
     <Compile Include="Endpoints\Events\Services\Comments\Create.cs" />
@@ -311,6 +318,8 @@
     <EmbeddedResource Include="Endpoints\Events\Templates\Reject.cshtml" />
     <EmbeddedResource Include="Endpoints\Events\Templates\Redir.cshtml" />
     <EmbeddedResource Include="Endpoints\Events\Templates\NewComment.cshtml" />
+    <EmbeddedResource Include="Endpoints\Events\Templates\NewParticipant.cshtml" />
+    <EmbeddedResource Include="Endpoints\Events\Templates\EventAdvice.cshtml" />
     <None Include="Properties\PublishProfiles\QAS.pubxml" />
     <None Include="Properties\PublishProfiles\QAS_Valentys.pubxml" />
     <None Include="Web.Debug.config">

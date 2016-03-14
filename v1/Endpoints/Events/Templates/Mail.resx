@@ -118,7 +118,13 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="CreateNewCommnet_Subject" xml:space="preserve">
-    <value>{0} a ha escrito un nuevo comentario!</value>
+    <value>{0} ha escrito un nuevo comentario!</value>
+  </data>
+  <data name="CreateNewParticipant_Subject" xml:space="preserve">
+    <value>{0} se ha unido a tu evento!</value>
+  </data>
+  <data name="EventAdvice_Subject" xml:space="preserve">
+    <value>{0} : Recordatorio</value>
   </data>
   <data name="Invitation_From_DisplayName" xml:space="preserve">
     <value>Equipo Widul</value>

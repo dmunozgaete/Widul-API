@@ -3,22 +3,23 @@
 <body style="font-family:arial; color: rgb(128, 128, 128); font-size:14px;">
     <center>
 
-        <div style="border: 1px solid rgb(229, 229, 229); width: 80%; max-width:650px; padding:24px; border-radius:3px; text-align:left;overflow:hidden;">
+        <div style="border: 1px solid rgb(229, 229, 229); width: 80%; max-width:600px; padding:24px; border-radius:3px; text-align:left;overflow:hidden;">
             <div style=" margin:-24px -24px 10px -24px;background:#3F51B5;">
                 <img style="width:100%; max-width:650px;" src="cid:header">
             </div>
             <br />
-            <span style="color:#FF1966; font-size: 2em; font-weight: lighter;"><img style="margin-right:5px;width: 25px;" src="cid:comment">Tienes un nuevo Comentario</span>
+            <span style="color:#FF1966; font-size: 2em; font-weight: lighter;"><img style="margin-right:5px;width: 25px;" src="cid:event">Recuerda que mañana asistiras a:</span>
             <br />
             <br />
-            <div style="width:100%; overflow: hidden;">
-                <div style="background:grey; width:80px; height:80px; border-radius:40px; float: left; display:block; overflow: hidden;">
+            <div style="width:580px; overflow: hidden; border:1px solid #f2f2f2; border-radius:3px; padding:10px;">
+                <div style="background:grey; width:80px; height:80px; border-radius:40px; float: left; overflow: hidden;">
                     <img style="width:100%;" src="cid:avatar">
                 </div>
-                <div style="float: left; margin:15px 0 0 10px;">
-                    <span style="font-size:1.5em; color:#333333;">@(Model.Comment.creator_name)</span>
-                    <p style="margin: 5px 0; max-width:560px;">@(Model.Comment.comment)</p>
+                <div style="float: left; max-width: 490px; margin: 10px 0 10px 10px;">
+                    <span style="font-size:1.5em; color:#333333;">@(Model.Event.name)</span>
+                    <p style="margin: 5px 0; max-width:540px;">@(Model.Event.description)</p>
                 </div>
+                <div style="float: right; margin:10px 0px 10px 10px; padding:10px 15px; background:#FF1966; color: white; border-radius:25px; font-size:18px;">Ver Clase</div>
             </div>
             <br />
             <br />

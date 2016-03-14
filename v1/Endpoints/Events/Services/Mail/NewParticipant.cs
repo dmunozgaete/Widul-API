@@ -11,7 +11,7 @@ namespace API.Endpoints.Events.Services.Mail
     /// <summary>
     /// Send a New Comment notification to the creator of the event
     /// </summary>
-    public class NewComment
+    public class NewParticipant
     {
 
         /// <summary>
@@ -19,7 +19,7 @@ namespace API.Endpoints.Events.Services.Mail
         /// </summary>
         /// <param name="mail"></param>
         /// <param name="model"></param>
-        public NewComment(MailMessage mail, dynamic model)
+        public NewParticipant(MailMessage mail, dynamic model)
         {
             mail.Body = RenderView(model);
             PrepareAndSend(mail,model);
@@ -48,20 +48,20 @@ namespace API.Endpoints.Events.Services.Mail
             //----------------------------------
 
             //----------------------------------
-            // COMMENT IMAGE
-            String resourcePath2 = "API.Endpoints.Events.Templates.comment.png";
+            // PARTICIPANT IMAGE
+            String resourcePath2 = "API.Endpoints.Events.Templates.person.png";
             System.IO.Stream stream2 = assembly.GetManifestResourceStream(resourcePath2);
-            LinkedResource comment_icon = new LinkedResource(stream2, "image/png");
-            comment_icon.ContentId = "comment";
+            LinkedResource participant_icon = new LinkedResource(stream2, "image/png");
+            participant_icon.ContentId = "participant";
 
-            alternateView.LinkedResources.Add(comment_icon);
+            alternateView.LinkedResources.Add(participant_icon);
             //----------------------------------
 
             //----------------------------------
             // USER IMAGE
 
-            
-            byte[] user_photo = (byte[])model.Comment.creator_photoBinary;
+
+            byte[] user_photo = (byte[])model.Participant.photo;
             System.IO.MemoryStream avatar_stream = new System.IO.MemoryStream(user_photo);
             LinkedResource avatar_link = new LinkedResource(avatar_stream, "image/png");
             avatar_link.ContentId = "avatar";
@@ -89,7 +89,7 @@ namespace API.Endpoints.Events.Services.Mail
         {
             //----------------------------------
             var assembly = this.GetType().Assembly;
-            String resourcePath = "API.Endpoints.Events.Templates.NewComment.cshtml";
+            String resourcePath = "API.Endpoints.Events.Templates.NewParticipant.cshtml";
 
             using (System.IO.Stream stream = assembly.GetManifestResourceStream(resourcePath))
             {

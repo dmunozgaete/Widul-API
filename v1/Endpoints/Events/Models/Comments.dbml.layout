@@ -8,10 +8,10 @@
         <elementListCompartment Id="c311b1de-8ea7-4fd9-a4df-7e25178f0499" absoluteBounds="0.51500000000000057, 3.71, 1.9700000000000002, 0.44169108072916663" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="c863d541-8720-4923-89e2-d24f5f82c67d" absoluteBounds="0.5, 0.5, 2, 1.9631982421875">
+    <classShape Id="c863d541-8720-4923-89e2-d24f5f82c67d" absoluteBounds="0.5, 0.5, 2, 2.1554996744791666">
       <DataClassMoniker Name="/CommentsDataContext/VW_EventComment" />
       <nestedChildShapes>
-        <elementListCompartment Id="9d991654-9929-4363-b859-64b549e88eaa" absoluteBounds="0.51499999999999968, 0.96, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="9d991654-9929-4363-b859-64b549e88eaa" absoluteBounds="0.51499999999999968, 0.96, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
   </nestedChildShapes>

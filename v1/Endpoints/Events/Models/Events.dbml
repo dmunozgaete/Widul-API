@@ -123,4 +123,34 @@
       <Column Name="USER_Photo" Member="photo" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="true" />
     </Type>
   </Table>
+  <Table Name="" Member="participantStates">
+    <Type Name="participantState">
+      <Column Name="state" Type="System.String" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TB_COR_User" Member="EventParticipants">
+    <Type Name="EventParticipant">
+      <Column Name="ENTI_Token" Member="token" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="USER_Email" Member="email" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="USER_FullName" Member="fullname" Storage="_name" Type="System.String" DbType="VarChar(250) NOT NULL" CanBeNull="false" />
+      <Column Name="DOCU_Token" Member="event_token" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="BINA_Binary" Member="photo" Type="System.Byte[]" DbType="Image NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+    </Type>
+  </Table>
+  <Table Name="dbo.VW_Events" Member="EventAdvices">
+    <Type Name="EventAdvice">
+      <Column Name="DOCU_Token" Member="token" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="EVNT_Date" Member="date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="EVNT_Description" Member="description" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="EVNT_Name" Member="name" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="USER_FullName" Member="creator_name" Type="System.String" DbType="VarChar(250) NOT NULL" CanBeNull="false" />
+      <Column Name="USER_Email" Member="creator_email" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="USER_Photo" Member="creator_photo" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="KNOW_Name" Member="knowledge_name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="KNOW_Token" Member="knowledge_token" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="PLAC_Name" Member="place_name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="PLAC_Token" Member="place_token" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="USER_PhotoBinary" Member="creator_photoBinary" Type="System.Byte[]" CanBeNull="false" />
+    </Type>
+  </Table>
 </Database>

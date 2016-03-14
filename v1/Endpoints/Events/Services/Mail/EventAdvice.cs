@@ -9,20 +9,16 @@ using RazorTemplates.Core;
 namespace API.Endpoints.Events.Services.Mail
 {
     /// <summary>
-    /// Send a New Comment notification to the creator of the event
+    /// Send a Event Advice to each participant in the incoming event (tomorrow).
     /// </summary>
-    public class NewComment
+    public class EventAdvice
     {
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="mail"></param>
-        /// <param name="model"></param>
-        public NewComment(MailMessage mail, dynamic model)
+
+        public EventAdvice(MailMessage mail, dynamic model)
         {
             mail.Body = RenderView(model);
-            PrepareAndSend(mail,model);
+            PrepareAndSend(mail, model);
         }
 
         private void PrepareAndSend(MailMessage mail, dynamic model)
@@ -41,33 +37,30 @@ namespace API.Endpoints.Events.Services.Mail
             // HEADER IMAGE
             String resourcePath = "API.Endpoints.Events.Templates.header.jpg";
             System.IO.Stream stream = assembly.GetManifestResourceStream(resourcePath);
-            LinkedResource header = new LinkedResource(stream , "image/jpg");
+            LinkedResource header = new LinkedResource(stream, "image/jpg");
             header.ContentId = "header";
-            
+
             alternateView.LinkedResources.Add(header);
             //----------------------------------
 
             //----------------------------------
-            // COMMENT IMAGE
-            String resourcePath2 = "API.Endpoints.Events.Templates.comment.png";
+            // EVENT ICON
+            String resourcePath2 = "API.Endpoints.Events.Templates.event.png";
             System.IO.Stream stream2 = assembly.GetManifestResourceStream(resourcePath2);
-            LinkedResource comment_icon = new LinkedResource(stream2, "image/png");
-            comment_icon.ContentId = "comment";
+            LinkedResource event_icon = new LinkedResource(stream2, "image/png");
+            event_icon.ContentId = "event";
 
-            alternateView.LinkedResources.Add(comment_icon);
+            alternateView.LinkedResources.Add(event_icon);
             //----------------------------------
+
 
             //----------------------------------
             // USER IMAGE
-
-            
-            byte[] user_photo = (byte[])model.Comment.creator_photoBinary;
+            byte[] user_photo = (byte[])model.Event.creator_photoBinary;
             System.IO.MemoryStream avatar_stream = new System.IO.MemoryStream(user_photo);
             LinkedResource avatar_link = new LinkedResource(avatar_stream, "image/png");
             avatar_link.ContentId = "avatar";
             alternateView.LinkedResources.Add(avatar_link);
-            
-
             //----------------------------------
 
             mail.AlternateViews.Add(alternateView);
@@ -89,7 +82,7 @@ namespace API.Endpoints.Events.Services.Mail
         {
             //----------------------------------
             var assembly = this.GetType().Assembly;
-            String resourcePath = "API.Endpoints.Events.Templates.NewComment.cshtml";
+            String resourcePath = "API.Endpoints.Events.Templates.EventAdvice.cshtml";
 
             using (System.IO.Stream stream = assembly.GetManifestResourceStream(resourcePath))
             {

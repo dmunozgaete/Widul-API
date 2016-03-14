@@ -138,7 +138,8 @@ namespace API.Endpoints.Events
         [Gale.Security.Oauth.Jwt.Authorize]
         public IHttpActionResult JoinEvent(String id)
         {
-            return new Services.Join(id, this.User.PrimarySid().ToString());
+            string host = this.Request.Headers.Referrer.ToString();
+            return new Services.Join(id, this.User.PrimarySid().ToString(), host);
         }
 
         /// <summary>
@@ -260,5 +261,18 @@ namespace API.Endpoints.Events
         }
 
         #endregion
+
+        #region --> ADVICE
+
+        [HttpGet]
+        [HierarchicalRoute("/Notification/Advice")]
+        public IHttpActionResult EventAdvice()
+        {
+            return new Services.Notifications.EventAdvice();
+        }
+
+        #endregion
+
+
     }
 }

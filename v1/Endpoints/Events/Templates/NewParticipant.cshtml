@@ -8,17 +8,19 @@
                 <img style="width:100%; max-width:650px;" src="cid:header">
             </div>
             <br />
-            <span style="color:#FF1966; font-size: 2em; font-weight: lighter;"><img style="margin-right:5px;width: 25px;" src="cid:comment">Tienes un nuevo Comentario</span>
+            <span style="color:#FF1966; font-size: 2em; font-weight: lighter;"><img style="margin-right:5px;width: 25px;" src="cid:participant">Tienes un nuevo participante</span>
             <br />
             <br />
             <div style="width:100%; overflow: hidden;">
-                <div style="background:grey; width:80px; height:80px; border-radius:40px; float: left; display:block; overflow: hidden;">
-                    <img style="width:100%;" src="cid:avatar">
+                <div style="width:48%; overflow: hidden; float: left;">
+                    <div style="background:grey; width:80px; height:80px; border-radius:40px; float: left; display:block; overflow: hidden;">
+                        <img style="width:100%;" src="cid:avatar">
+                    </div>
+                    <div style="float: left; margin:30px 0 0 10px;">
+                        <span style="font-size:1.5em; color:#333333;">@(Model.Participant.fullname)</span>
+                    </div>
                 </div>
-                <div style="float: left; margin:15px 0 0 10px;">
-                    <span style="font-size:1.5em; color:#333333;">@(Model.Comment.creator_name)</span>
-                    <p style="margin: 5px 0; max-width:560px;">@(Model.Comment.comment)</p>
-                </div>
+
             </div>
             <br />
             <br />

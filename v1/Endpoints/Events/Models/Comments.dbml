@@ -13,6 +13,7 @@
       <Column Name="COMM_Comment" Member="comment" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" />
       <Column Name="COMM_createdAt" Member="createdAt" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="COMM_Token" Member="token" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="USER_PhotoBinary" Member="creator_photoBinary" Type="System.Byte[]" CanBeNull="false" />
     </Type>
   </Table>
 </Database>
