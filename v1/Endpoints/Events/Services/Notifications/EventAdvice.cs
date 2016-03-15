@@ -50,14 +50,14 @@ namespace API.Endpoints.Events.Services.Notifications
                             {
                                 Subject = String.Format(Templates.Mail.EventAdvice_Subject, cEvent.name),
                             };
-                            message.To.Add(new MailAddress("sebastianmorenoe@gmail.com"));
+                            message.To.Add(new MailAddress(participant.email));
 
                             //Embed Images , and send
                             new Mail.EventAdvice(message, new
                             {
                                 Event = cEvent,
                                 Participant = participant,
-                                Host = System.Configuration.ConfigurationManager.AppSettings["Platform:Url"],
+                                Host = System.Configuration.ConfigurationManager.AppSettings["Platform:Web"],
                                 
                             });
                             //----------------------------------------------------------------------

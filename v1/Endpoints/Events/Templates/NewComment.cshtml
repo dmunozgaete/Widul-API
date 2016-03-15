@@ -11,15 +11,35 @@
             <span style="color:#FF1966; font-size: 2em; font-weight: lighter;"><img style="margin-right:5px;width: 25px;" src="cid:comment">Tienes un nuevo Comentario</span>
             <br />
             <br />
-            <div style="width:100%; overflow: hidden;">
-                <div style="background:grey; width:80px; height:80px; border-radius:40px; float: left; display:block; overflow: hidden;">
-                    <img style="width:100%;" src="cid:avatar">
-                </div>
-                <div style="float: left; margin:15px 0 0 10px;">
-                    <span style="font-size:1.5em; color:#333333;">@(Model.Comment.creator_name)</span>
-                    <p style="margin: 5px 0; max-width:560px;">@(Model.Comment.comment)</p>
-                </div>
-            </div>
+
+
+            <table style="width:100%; border:1px solid #f2f2f2; border-radius:3px; padding:10px;">
+                <tr>
+                    <td width="80px">
+                        <center>
+                            <div style="background:grey; height:80px; max-height:80px; min-height:80px; width:80px; border-radius:40px; overflow: hidden;">
+                                <img style="width:100%;" src="cid:avatar">
+                            </div>
+                        </center>
+                    </td>
+                    <td>
+                        <div style="margin:10px 0px 10px 10px;">
+                            <span style="font-size:1.5em; color:#333333;">@(Model.Comment.creator_name)</span>
+                            <p style="margin: 5px 0; max-width:560px;">@(Model.Comment.comment)</p>
+                        </div>
+                    </td>
+                </tr>
+                <!--
+        <tr>
+            <td></td>
+            <td align="right">
+                <a style="text-decoration:none; float:right; margin:10px 0px 10px 10px; padding:10px 15px; background:#FF1966; color: white; border-radius:25px; font-size:18px;">
+                    Ver&nbsp;Evento
+                </a>
+            </td>
+        </tr>
+            -->
+            </table>
             <br />
             <br />
             <div>

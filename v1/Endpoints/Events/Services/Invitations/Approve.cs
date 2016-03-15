@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
+using System.Net.Mail;
 
 namespace API.Endpoints.Events.Services.Invitations
 {
@@ -76,7 +77,36 @@ namespace API.Endpoints.Events.Services.Invitations
                     svc.Parameters.Add("USER_Token", _user);
                     svc.Parameters.Add("EVNT_Token", this.Model);
 
-                    this.ExecuteAction(svc);
+                    //String state = (String)this.ExecuteScalar(svc);
+                    var repo = this.ExecuteQuery(svc);
+
+                    var state = repo.GetModel<Models.participantState>().FirstOrDefault();
+                    var creator = repo.GetModel<Models.EventCreator>(1).FirstOrDefault();
+                    var newlyParticipant = repo.GetModel<Models.EventParticipant>(2).FirstOrDefault();
+
+                    //TODO: Send Mail in Async (Fire && Forget)
+                    Task.Factory.StartNew(() =>
+                    {
+
+                        //----------------------------------------------------------------------
+                        //Invitation Email
+                        MailMessage message = new MailMessage()
+                        {
+                            Subject = String.Format(Templates.Mail.CreateNewParticipant_Subject, newlyParticipant.fullname),
+                        };
+                        message.To.Add(new MailAddress(creator.email));
+
+                        //Embed Images , and send
+                        new Mail.NewParticipant(message, new
+                        {
+                            Creator = creator,
+                            Participant = newlyParticipant,
+                            Host = this._host
+                        });
+                        //----------------------------------------------------------------------
+
+                    });
+
                 }
             }
 
