@@ -253,11 +253,11 @@ namespace API.Endpoints.Events
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet]
-        [HierarchicalRoute("/Redir/{id:Guid}")]
+        [HierarchicalRoute("/Redirect/{id:Guid}")]
         public IHttpActionResult Redirect(String id)
         {
-            string host = HttpContext.Current.Request.Url.Host;
-            return new Services.Redirect(id, host);
+
+            return new Services.Redirect(id);
         }
 
         #endregion

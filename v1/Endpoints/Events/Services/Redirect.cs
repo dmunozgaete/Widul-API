@@ -15,19 +15,16 @@ namespace API.Endpoints.Events.Services
     public class Redirect : Gale.REST.Http.HttpCreateActionResult<String>
     {
 
-        String _host;
-
-        public Redirect(String eventToken, String host)
+        public Redirect(String eventToken)
             : base(eventToken)
         {
-            _host = host;
         }
 
         private string RenderView(dynamic model)
         {
             //----------------------------------
             var assembly = this.GetType().Assembly;
-            String resourcePath = "API.Endpoints.Events.Templates.Redir.cshtml";
+            String resourcePath = "API.Endpoints.Events.Templates.Redirect.cshtml";
 
             using (System.IO.Stream stream = assembly.GetManifestResourceStream(resourcePath))
             {
@@ -79,8 +76,8 @@ namespace API.Endpoints.Events.Services
                 String html = RenderView(new
                 {
                     Event = eventDetail,
-                    AppUrl = this._host,
-                    EventToken = this.Model
+                    AppUrl = System.Configuration.ConfigurationManager.AppSettings["Platform:Web"],
+                    ApiUrl = System.Configuration.ConfigurationManager.AppSettings["Platform:Api"]
                 });
 
                 var response = new HttpResponseMessage()

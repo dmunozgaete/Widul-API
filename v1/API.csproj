@@ -316,7 +316,7 @@
     <EmbeddedResource Include="Endpoints\Events\Templates\Invitation.cshtml" />
     <EmbeddedResource Include="Endpoints\Events\Templates\Approve.cshtml" />
     <EmbeddedResource Include="Endpoints\Events\Templates\Reject.cshtml" />
-    <EmbeddedResource Include="Endpoints\Events\Templates\Redir.cshtml" />
+    <EmbeddedResource Include="Endpoints\Events\Templates\Redirect.cshtml" />
     <EmbeddedResource Include="Endpoints\Events\Templates\NewComment.cshtml" />
     <EmbeddedResource Include="Endpoints\Events\Templates\NewParticipant.cshtml" />
     <EmbeddedResource Include="Endpoints\Events\Templates\EventAdvice.cshtml" />

@@ -1,0 +1,32 @@
+﻿<html>
+
+<head>
+    <title>Widul</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+    
+    
+    <meta http-equiv="refresh" content="0;URL=@(Model.AppUrl)/#/public/events/view/resume/index/@(Model.Event.token)">
+
+    <!-- FACEBOOK OPEN GRAPH-->
+    <meta property="og:title" content="@(Model.Event.name)">
+    <meta property="og:description" content="@(Model.Event.description)">
+    <meta property="og:image" content="@(Model.ApiUrl)/Events/@(Model.Event.token)/Thumbnail" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    
+
+    <!-- TWITTER OPEN GRAPH-->
+    <meta name=”twitter:card” content=”summary” />
+    <meta name="twitter:title" content="@(Model.Event.name)">
+    <meta name="twitter:description" content="@(Model.Event.description)">
+    <meta name="twitter:image" content="@(Model.ApiUrl)/Events/@(Model.Event.token)/Thumbnail" />
+
+</head>
+
+<body style="font-family:Arial">
+    <p>Te estamos redirigiendo al evento: @(Model.Event.name)</p>
+</body>
+
+</html>
