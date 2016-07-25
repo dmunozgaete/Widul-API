@@ -662,6 +662,10 @@ namespace API.Endpoints.Events.Models
 		
 		private List<Models.VW_EventComment> _comments_latest;
 		
+		private bool _wasRecorded;
+		
+		private string _videoLink;
+		
 		public EventDetails()
 		{
 		}
@@ -1033,6 +1037,38 @@ namespace API.Endpoints.Events.Models
 				}
 			}
 		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="EVNT_wasRecorded", Storage="_wasRecorded", DbType="Bit NOT NULL")]
+		public bool wasRecorded
+		{
+			get
+			{
+				return this._wasRecorded;
+			}
+			set
+			{
+				if ((this._wasRecorded != value))
+				{
+					this._wasRecorded = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="EVNT_videoLink", Storage="_videoLink", DbType="VarChar(500)")]
+		public string videoLink
+		{
+			get
+			{
+				return this._videoLink;
+			}
+			set
+			{
+				if ((this._videoLink != value))
+				{
+					this._videoLink = value;
+				}
+			}
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.VW_Events")]
@@ -1058,6 +1094,10 @@ namespace API.Endpoints.Events.Models
 		private string _knowledge_name;
 		
 		private System.Guid _knowledge_token;
+		
+		private bool _wasRecorded;
+		
+		private string _videoLink;
 		
 		public FindedEvent()
 		{
@@ -1219,6 +1259,38 @@ namespace API.Endpoints.Events.Models
 				if ((this._knowledge_token != value))
 				{
 					this._knowledge_token = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="EVNT_wasRecorded", Storage="_wasRecorded", DbType="Bit NOT NULL")]
+		public bool wasRecorded
+		{
+			get
+			{
+				return this._wasRecorded;
+			}
+			set
+			{
+				if ((this._wasRecorded != value))
+				{
+					this._wasRecorded = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="EVNT_videoLink", Storage="_videoLink", DbType="VarChar(500)")]
+		public string videoLink
+		{
+			get
+			{
+				return this._videoLink;
+			}
+			set
+			{
+				if ((this._videoLink != value))
+				{
+					this._videoLink = value;
 				}
 			}
 		}

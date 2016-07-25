@@ -173,6 +173,7 @@
     <Compile Include="Endpoints\Events\Services\Invitations\Create.cs" />
     <Compile Include="Endpoints\Events\Services\Join.cs" />
     <Compile Include="Endpoints\Events\Services\Left.cs" />
+    <Compile Include="Endpoints\Events\Services\Live.cs" />
     <Compile Include="Endpoints\Events\Services\Search.cs" />
     <Compile Include="Endpoints\Events\Services\Thumbnail.cs" />
     <Compile Include="Endpoints\Events\Templates\Mail.Designer.cs">

@@ -34,7 +34,9 @@ namespace API.Endpoints.Security
             //Gale.Exception.RestException.Guard(() => credentials.email == null, "EMPTY_EMAIL", API.Errors.ResourceManager);
             //------------------------------------------------------------------------------------------------------------------------
 
-            string host = this.Request.Headers.Referrer.ToString();
+            //string host = this.Request.Headers.Referrer.ToString();
+            string host = "http://www.widul.com/";
+
             return new Services.Oauth.Facebook(this.Request, host, credentials);
 
         }

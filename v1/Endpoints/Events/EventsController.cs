@@ -105,7 +105,8 @@ namespace API.Endpoints.Events
         [Gale.Security.Oauth.Jwt.Authorize]
         public IHttpActionResult CreateComment(String id, Models.NewComment comment)
         {
-            string host = this.Request.Headers.Referrer.ToString();
+            //string host = this.Request.Headers.Referrer.ToString();
+            string host = "http://www.widul.com/";
             return new Services.Comments.Create(id, this.User.PrimarySid().ToString(), host, comment);
         }
 
@@ -127,6 +128,22 @@ namespace API.Endpoints.Events
 
         #endregion
 
+        #region --> LIVE EVENTS
+
+        /// <summary>
+        /// GET ALL LIVE EVENTS
+        /// </summary>
+        /// <param name="q">Query</param>
+        /// <returns></returns>
+        [HttpGet]
+        [HierarchicalRoute("/Live")]
+        public IHttpActionResult LiveEvent(String q = null)
+        {
+            return new Services.Live(q);
+        }
+
+        #endregion
+
         #region --> JOIN
         /// <summary>
         /// Join to a Event by its GUID
@@ -138,7 +155,9 @@ namespace API.Endpoints.Events
         [Gale.Security.Oauth.Jwt.Authorize]
         public IHttpActionResult JoinEvent(String id)
         {
-            string host = this.Request.Headers.Referrer.ToString();
+            //string host = this.Request.Headers.Referrer.ToString();
+            string host = "http://www.widul.com/";
+
             return new Services.Join(id, this.User.PrimarySid().ToString(), host);
         }
 
@@ -172,7 +191,9 @@ namespace API.Endpoints.Events
             var me = this.User.PrimarySid().ToString();
             var me_name = this.User.Claim(System.Security.Claims.ClaimTypes.Name);
 
-            string host = this.Request.Headers.Referrer.ToString();
+            //string host = this.Request.Headers.Referrer.ToString();
+            string host = "http://www.widul.com/";
+
             string apiUrl = System.Web.HttpContext.Current.Request.Url.AbsoluteUri;
             return new Services.Invitations.Create(id, me, me_name, guests, host, apiUrl);
         }

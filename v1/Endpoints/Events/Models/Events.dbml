@@ -62,6 +62,8 @@
       <Column Name="participants_tops" Type="List&lt;Models.TopParticipant&gt;" CanBeNull="false" />
       <Column Name="TotalComments" Member="comments_total" Type="System.Int32" CanBeNull="false" />
       <Column Name="comments_latest" Type="List&lt;Models.VW_EventComment&gt;" CanBeNull="false" />
+      <Column Name="EVNT_wasRecorded" Member="wasRecorded" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="EVNT_videoLink" Member="videoLink" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.VW_Events" Member="FindedEvent">
@@ -76,6 +78,8 @@
       <Column Name="USER_Photo" Member="creator_photo" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
       <Column Name="KNOW_Name" Member="knowledge_name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="KNOW_Token" Member="knowledge_token" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="EVNT_wasRecorded" Member="wasRecorded" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="EVNT_videoLink" Member="videoLink" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.TB_WID_EventTag" Member="FindedTag">
